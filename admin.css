@@ -1,0 +1,29 @@
+h1
+{
+    color: DarkCyan;
+    font-size: 30px;
+    text-align: center;
+}
+
+form
+{
+    background-color: lightblue;
+    margin: auto;
+    border: 5px;
+    border-style: solid;
+    border-color: Darkblue;
+}
+label
+{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+div#form
+{
+    display: flex;
+}
+/*
+#pname{ size: 30; }
+#price{ size: 10; }
+#amount{ size: 5; }
