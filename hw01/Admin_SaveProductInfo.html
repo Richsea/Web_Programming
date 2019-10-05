@@ -8,23 +8,23 @@
 <body>
     <h1>Save Product Information</h1>
     <div id="form">
-        <form>
+        <form name='save' action="upload.php" method="post" enctype="multipart/form-data">
             <table>
                 <tr>
                     <td><label>Product Name</label></td>
-                    <td><input type="text" id="pname" maxlength="30"></td>
+                    <td><input type="text" name="pname" id="pname" maxlength="30"></td>
                 </tr>
                 <tr>
                     <td><label>Price</label></td>
-                    <td><input type="number" id="price" min="0" max="9999999999"></td>
+                    <td><input type="number" name="price" id="price" min="0" max="9999999999"></td>
                 </tr>
                 <tr>
                     <td><label>Amount</label></td>
-                    <td><input type="number" id="amount" min="0" max="99999"></td>
+                    <td><input type="number" name="amount" id="amount" min="0" max="99999"></td>
                 </tr>
                 <tr>
                     <td><label>Preview</label></td>
-                    <td><input type="file" id="file"></td>
+                    <td><input type="file" id="file" name="update_file"></td>
                 </tr>
                 <tr>
                     <td></td>
