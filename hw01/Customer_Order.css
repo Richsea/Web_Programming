@@ -1,0 +1,18 @@
+table, th, td
+{
+    border: 1px solid black;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+thead
+{
+    border: 1px solid;
+    background-color: green;
+    color: white;
+}
+
+#show_chosen
+{
+    padding: 10px 0px;
+}

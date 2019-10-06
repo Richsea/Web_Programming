@@ -37,7 +37,7 @@ else
     {
         chmod($img_file, 777);  // 계속 관리자 권한으로 들어가는 문제 해결 필요..
         fwrite($data_file, $book_name . '|' . $book_price . '|' . $book_amount . '|' . $img_file . "\r\n");
-        echo "The file " . $img_file . "has been uplaoded";
+        echo("<script>location.replace('./Saved.html');</script>");
     }
     else
     {
@@ -60,14 +60,6 @@ function getExt($filename, $file_str = "/php|html|htm|exe|ph/")
     }
     
     return $ext;
-}
-
-function getBookName($filename)
-{
-    $split_array = explode("|", $filename)
-    {
-
-    }
 }
 
 ?>

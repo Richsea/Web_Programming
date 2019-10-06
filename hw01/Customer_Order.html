@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>order page</title>
+    <link rel="stylesheet" type="text/css" href="Customer_Order.css"/>
+</head>
+<body>
+    <h1>도서 주문 페이지</h1>
+    <span><p>구매자 아이디 : <input type="text"></p></span>
+    
+    <table id="order_box">
+        <input type="checkbox" name="choose_all">모두 선택
+        <thead>
+        <tr>
+            <td>선택</td>
+            <td>상품명</td>
+            <td>미리보기</td>
+            <td>정가</td>
+            <td>수량</td>
+            <td>합계</td>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5" ><strong>선택한 총 상품 금액</strong></td>
+                <td name="total_cost"></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div id="show_chosen">총 <span name="chosen"></span>개 상품 선택</div>
+    <span><input type="button" value="삭제하기"><input type="button" value="주문하기"></span>
+</body>
+</html>
