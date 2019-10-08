@@ -25,3 +25,8 @@ thead
     appearance: button;
     padding: 2px;
 }
+
+.hidden_data
+{
+    display: none;
+}

@@ -21,7 +21,7 @@
             <td>합계</td>
         </tr>
         </thead>
-        <tbody name="tbody">
+        <tbody id="tbody" name="tbody">
         </tbody>
         <tfoot>
             <tr>
@@ -33,10 +33,7 @@
 
     <div id="show_chosen">총 <span name="chosen"></span>개 상품 선택</div>
     <span><input type="button" value="삭제하기"><input type="button" value="주문하기"></span>
-    <div id="book_list">
-        <?php include './Read_product.php';?>
-    </div>
-    <!--<script>location.replace('./Read_product.php');</script>    <!-- php test용 코드 -->
-    <a href="https://stackoverflow.com/questions/23740548/how-do-i-pass-variables-and-data-from-php-to-javascript">click</a>
+    <?php include './Read_product.php';?>
+    <script src="Read_product.js"></script>
 </body>
 </html>

@@ -1,7 +1,4 @@
-function test()
-{
-    document.write("working");
-}
+test();
 
 function initialTable(pname, price, amount, img_dir, total_value)
 {
@@ -54,32 +51,21 @@ function initialTable(pname, price, amount, img_dir, total_value)
     add_tr.appendChild(add_td);
     
     // make file    
-    document.getElementById("tbody").appendChild(add_tr);
-
-    windows.alert("working");
-    
+    document.getElementById("tbody").appendChild(add_tr);   
 }
 
-function getArray(list)
+function test()
 {
-    window.alert("working");
-    console.log("hi");
-
-    var pname = list[0];
-    var price = list[1];
-    var amount = list[2];
-    var img_dir = list[3];
-    var total_value =list[4];
-
-    initialTable(pname, price, amount, img_dir, total_value);
-
-    /*
-    JavaScript에서 php호출하자.
-    php 연산 결과를 echo를 통해 저장하자.
-    push로 echo를 통한 결과를 JS에 저장하자
-
-    var target = document.createElement("script");
-    target.setAttribute("src", "Read_product.php");
-    document.getElementsByTagName("body")[0].appendChild(target);
-    */
+    var size = document.getElementsByTagName('ol').length;
+    
+    for(var i=0; i < size; i++)
+    {
+        var pname = document.getElementsByClassName(String(i))[0].innerHTML;
+        var price = document.getElementsByClassName(String(i))[1].innerHTML;
+        var amount = document.getElementsByClassName(String(i))[2].innerHTML;
+        var img_dir = document.getElementsByClassName(String(i))[3].innerHTML;
+        var total_value = document.getElementsByClassName(String(i))[4].innerHTML;
+        
+        initialTable(pname, price, amount, img_dir, total_value);
+    }    
 }
