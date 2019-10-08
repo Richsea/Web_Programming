@@ -1,6 +1,6 @@
 function test()
 {
-    console.log("it works");
+    document.write("working");
 }
 
 function initialTable(pname, price, amount, img_dir, total_value)
@@ -55,13 +55,16 @@ function initialTable(pname, price, amount, img_dir, total_value)
     
     // make file    
     document.getElementById("tbody").appendChild(add_tr);
+
+    windows.alert("working");
     
 }
 
 function getArray(list)
 {
     window.alert("working");
-    
+    console.log("hi");
+
     var pname = list[0];
     var price = list[1];
     var amount = list[2];
@@ -70,4 +73,13 @@ function getArray(list)
 
     initialTable(pname, price, amount, img_dir, total_value);
 
+    /*
+    JavaScript에서 php호출하자.
+    php 연산 결과를 echo를 통해 저장하자.
+    push로 echo를 통한 결과를 JS에 저장하자
+
+    var target = document.createElement("script");
+    target.setAttribute("src", "Read_product.php");
+    document.getElementsByTagName("body")[0].appendChild(target);
+    */
 }
