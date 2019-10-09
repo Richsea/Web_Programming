@@ -7,10 +7,10 @@
 </head>
 <body>
     <h1>도서 주문 페이지</h1>
-    <span><p>구매자 아이디 : <input type="text"></p></span>
+    <span><p id="buyer_id">구매자 아이디 : <input type="text"></p></span>
     
     <table id="order_box">
-        <input type="checkbox" name="choose_all">모두 선택
+        <input type="checkbox" id="choose_all" name="choose_all" onclick="update_Choose_All()">모두 선택
         <thead>
         <tr>
             <td>선택</td>
@@ -26,12 +26,12 @@
         <tfoot>
             <tr>
                 <td colspan="5" ><strong>선택한 총 상품 금액</strong></td>
-                <td name="total_cost"></td>
+                <td name="total_cost"><?php echo htmlspecialchars(0); ?></td>
             </tr>
         </tfoot>
     </table>
 
-    <div id="show_chosen">총 <span name="chosen"></span>개 상품 선택</div>
+    <div id="show_chosen">총 <span name="chosen"><?php echo htmlspecialchars(0); ?></span>개 상품 선택</div>
     <span><input type="button" value="삭제하기"><input type="button" value="주문하기"></span>
     <?php include './Read_product.php';?>
     <script src="Read_product.js"></script>

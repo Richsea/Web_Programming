@@ -14,13 +14,14 @@
     function setAttribute($book_data, $obj_num)
     {
         $list_book_atr = explode("|", $book_data);
+        $total_value = $list_book_atr[1] * $list_book_atr[2];
 
         echo "<ol class='hidden_data'>";
         echo "<li class='" . $obj_num . "'>" . $list_book_atr[0] . "</li>";
         echo "<li class='" . $obj_num . "'>" . $list_book_atr[1] . "</li>";
         echo "<li class='" . $obj_num . "'>" . $list_book_atr[2] . "</li>";
         echo "<li class='" . $obj_num . "'>" . $list_book_atr[3] . "</li>";
-        echo "<li class='" . $obj_num . "'>" . $list_book_atr[4] . "</li>";
+        echo "<li class='" . $obj_num . "'>" . $total_value . "</li>";
         echo "</ol>";          
     }
     function makeProductTable($bookList)

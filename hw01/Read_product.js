@@ -1,4 +1,4 @@
-test();
+getInitialTable();
 
 function initialTable(pname, price, amount, img_dir, total_value)
 {
@@ -7,6 +7,7 @@ function initialTable(pname, price, amount, img_dir, total_value)
     var add_td = document.createElement('td');
     var add_input = document.createElement('input');
     add_input.setAttribute('type', 'checkbox');
+    //add_input.setAttribute('onclick', 'update_Choose_Product(' + ')');
     add_td.appendChild(add_input);  // 한줄로 하는것보다 여백 존재
     add_tr.appendChild(add_td);
 
@@ -17,13 +18,12 @@ function initialTable(pname, price, amount, img_dir, total_value)
                             
     // show_img
     add_td = document.createElement('td');                 
+    add_input = document.createElement('button');
     var add_a = document.createElement('a');
     add_a.setAttribute('href', img_dir);
-    add_a.setAttribute('type', 'button');
-    add_a.setAttribute('class', 'btn');
-    add_a.setAttribute('target', '_blank');
     add_a.appendChild(document.createTextNode('미리보기'));
-    add_td.appendChild(add_a);
+    add_input.appendChild(add_a);
+    add_td.appendChild(add_input);
     add_tr.appendChild(add_td);
     
     // price
@@ -54,12 +54,13 @@ function initialTable(pname, price, amount, img_dir, total_value)
     document.getElementById("tbody").appendChild(add_tr);   
 }
 
-function test()
+function getInitialTable()
 {
     var size = document.getElementsByTagName('ol').length;
     
     for(var i=0; i < size; i++)
     {
+        var test = document.getElementsByClassName(String(i))[0];
         var pname = document.getElementsByClassName(String(i))[0].innerHTML;
         var price = document.getElementsByClassName(String(i))[1].innerHTML;
         var amount = document.getElementsByClassName(String(i))[2].innerHTML;
@@ -67,5 +68,16 @@ function test()
         var total_value = document.getElementsByClassName(String(i))[4].innerHTML;
         
         initialTable(pname, price, amount, img_dir, total_value);
-    }    
+    }
+
+}
+
+function update_Choose_All()
+{
+
+}
+
+function update_Choose_Product(num)
+{
+
 }

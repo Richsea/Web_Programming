@@ -18,14 +18,6 @@ thead
     padding: 10px 0px;
 }
 
-.btn
-{
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    padding: 2px;
-}
-
 .hidden_data
 {
     display: none;
