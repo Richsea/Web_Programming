@@ -1,83 +1,102 @@
-getInitialTable();
-
-function initialTable(pname, price, amount, img_dir, total_value)
-{
-    // choose
-    var add_tr = document.createElement('tr');
-    var add_td = document.createElement('td');
-    var add_input = document.createElement('input');
-    add_input.setAttribute('type', 'checkbox');
-    //add_input.setAttribute('onclick', 'update_Choose_Product(' + ')');
-    add_td.appendChild(add_input);  // 한줄로 하는것보다 여백 존재
-    add_tr.appendChild(add_td);
-
-    // product_name
-    add_td = document.createElement('td');
-    add_td.appendChild(document.createTextNode(pname));            
-    add_tr.appendChild(add_td);
-                            
-    // show_img
-    add_td = document.createElement('td');                 
-    add_input = document.createElement('button');
-    var add_a = document.createElement('a');
-    add_a.setAttribute('href', img_dir);
-    add_a.appendChild(document.createTextNode('미리보기'));
-    add_input.appendChild(add_a);
-    add_td.appendChild(add_input);
-    add_tr.appendChild(add_td);
-    
-    // price
-    add_td = document.createElement('td');
-    add_td.appendChild(document.createTextNode(price));
-    add_tr.appendChild(add_td);
-    
-    // amount
-    add_td = document.createElement('td');
-    add_input = document.createElement('input');
-    add_input.setAttribute('type', 'number');
-    add_input.setAttribute('value', amount);
-    add_input.setAttribute('max', amount);
-    add_input.setAttribute('min', 0);
-    add_td.appendChild(add_input);
-    add_input = document.createElement('input');
-    add_input.setAttribute('type', 'button');
-    add_input.setAttribute('value', '변경');
-    add_td.appendChild(add_input);
-    add_tr.appendChild(add_td);
-    
-    // total_value
-    add_td = document.createElement('td');
-    add_td.appendChild(document.createTextNode(total_value));
-    add_tr.appendChild(add_td);
-    
-    // make file    
-    document.getElementById("tbody").appendChild(add_tr);   
-}
-
-function getInitialTable()
-{
-    var size = document.getElementsByTagName('ol').length;
-    
-    for(var i=0; i < size; i++)
-    {
-        var test = document.getElementsByClassName(String(i))[0];
-        var pname = document.getElementsByClassName(String(i))[0].innerHTML;
-        var price = document.getElementsByClassName(String(i))[1].innerHTML;
-        var amount = document.getElementsByClassName(String(i))[2].innerHTML;
-        var img_dir = document.getElementsByClassName(String(i))[3].innerHTML;
-        var total_value = document.getElementsByClassName(String(i))[4].innerHTML;
-        
-        initialTable(pname, price, amount, img_dir, total_value);
-    }
-
-}
-
 function update_Choose_All()
 {
+    var product_list = document.getElementsByName('choose');
+    var i = 0;
 
+    if(!document.getElementById('choose_all').checked)
+    {
+        while(true)
+        {
+            if(i > product_list.length-1) break;
+
+            product_list[i].checked = false;
+            i++;
+        }
+        setChosenProduct(0);
+    }
+    else
+    {
+        while(true)
+        {
+            if(i > product_list.length-1) break;
+
+            product_list[i].checked = true;
+            i++;
+        }
+        setChosenProduct(product_list.length);
+    }
+
+    calculate_Value();
 }
 
-function update_Choose_Product(num)
+function update_Choose_Product()
 {
+    var product_list = document.getElementsByName('choose');
+    var array_chosen = new Array(product_list.length);
+    var i = 0;
+    var checkCount = 0;     // for choosed product count
+    
+    while(true)
+    {
+        if(i > product_list.length-1) break;
 
+        if(product_list[i].checked)
+        {
+            array_chosen[i] = true;
+            checkCount++;
+        }
+        else 
+            array_chosen[i] = false;
+        
+        i++;
+    }
+
+    if(checkCount == product_list.length) document.getElementById("choose_all").checked = true;
+    else document.getElementById("choose_all").checked = false;
+
+    calculate_Value(array_chosen);
+    setChosenProduct(checkCount);
+}
+
+function calculate_Value(array = null)
+{
+    var newValue = 0;
+    var i = 0;
+    if(!array)
+    {
+        if(document.getElementById('choose_all').checked)
+        {
+            while(true)
+            {
+                if(i > document.getElementsByName('choose').length-1) break;
+
+                newValue += document.getElementById('price_' + i).textContent * document.getElementById('amount_' + i).value;
+                i++
+            }
+        }
+    }
+    else
+    {
+        while(true)
+        {
+            if(i > document.getElementsByName('choose').length-1) break;
+
+            if(array[i])
+                newValue += document.getElementById('price_' + i).textContent * document.getElementById('amount_' + i).value;
+            i++
+        }  
+    }
+
+    var newTotal = document.createElement('span');
+    newTotal.setAttribute('id', 'value');
+    newTotal.appendChild(document.createTextNode(newValue));
+    document.getElementById('total_cost').replaceChild(newTotal, document.getElementById('value'));
+}
+
+function setChosenProduct(number)
+{
+    var newCount = document.createElement('span');
+    newCount.setAttribute('id', 'chosen');
+    newCount.appendChild(document.createTextNode(number));
+    document.getElementById('show_chosen').replaceChild(newCount, document.getElementById('chosen'));
 }
