@@ -45,15 +45,15 @@
                 function write_Table($book_data, $obj_num)
                 {
                     $list_book_atr = explode("|", $book_data);
-                    $total_value = htmlspecialchars($list_book_atr[1]) * htmlspecialchars($list_book_atr[2]);
+                    $item_value = htmlspecialchars($list_book_atr[1]) * htmlspecialchars($list_book_atr[2]);
 
                     echo "<tr>";
                     echo "<td><input type='checkbox' name='choose' onclick='update_Choose_Product();'></td>";
-                    echo "<td><span id='pname_" . $obj_num . "'>" . htmlspecialchars($list_book_atr[0]) . "</span></td>";
+                    echo "<td><span name='pname'>" . htmlspecialchars($list_book_atr[0]) . "</span></td>";
                     echo "<td><button><a href='" . htmlspecialchars($list_book_atr[3]) . "'>미리보기</a></button></td>";
-                    echo "<td><span id='price_" . $obj_num . "'>" . htmlspecialchars($list_book_atr[1]) . "</span></td>";
-                    echo "<td><input type='number' id='amount_" . $obj_num . "' value='" . htmlspecialchars($list_book_atr[2]) . "' max='" . htmlspecialchars($list_book_atr[2]) . "' min='0'><input type='button' value='변경'></td>";
-                    echo "<td><span id='total_value'>" . $total_value . "</span></td>";
+                    echo "<td><span name='price'>" . htmlspecialchars($list_book_atr[1]) . "</span></td>";
+                    echo "<td><input type='number' name='amount' value='" . htmlspecialchars($list_book_atr[2]) . "' max='" . htmlspecialchars($list_book_atr[2]) . "' min='0' oninput='isUnderMax(" . $obj_num . ");'><input type='button' value='변경' onclick='clickChangeButton(" . $obj_num . ");'></td>";
+                    echo "<td name='item_value'><span name='value_data'>" . $item_value . "</span></td>";
                     echo "</tr>";
                 }
                 ?>        
@@ -61,12 +61,12 @@
         <tfoot>
             <tr>
                 <td colspan="5" ><strong>선택한 총 상품 금액</strong></td>
-                <td id="total_cost" name="total_cost"><span id='value'><?php echo htmlspecialchars(0); ?></span></td>
+                <td id="total_cost" name="total_cost"><span id='cost_data'><?php echo htmlspecialchars(0); ?></span></td>
             </tr>
         </tfoot>
     </table>
 
-    <div id="show_chosen">총 <span id="chosen"><?php echo htmlspecialchars(0); ?></span>개 상품 선택</div>
+    <div id="chosen">총 <span id="chosen_data"><?php echo htmlspecialchars(0); ?></span>개 상품 선택</div>
     <span><input type="button" value="삭제하기"><input type="button" value="주문하기"></span>
     <!--<?php include './Read_product.php';?>-->
     <script src="Read_product.js"></script>
