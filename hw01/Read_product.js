@@ -1,9 +1,3 @@
-let lastAmount_arr = new Array(document.getElementsByName('choose').length);
-for(var i=0; i < lastAmount_arr.length; i++)
-{
-    lastAmount_arr[i] = document.getElementsByName('amount')[i].value;
-}
-
 /**
  * update all of the table line's checkboxes
  * update total cost and selected product's count
@@ -46,29 +40,25 @@ function update_Choose_All()
 function update_Choose_Product()
 {
     var product_list = document.getElementsByName('choose');
-    var array_chosen = new Array(product_list.length);
-    var i = 0;
     var checkCount = 0;     // for choosed product count
-    
+    var i = 0;
+
+    var checkbox = makeupCheckboxList();
+
     while(true)
     {
-        if(i > product_list.length-1) break;
+        if(i > checkbox.length-1) break;
 
-        if(product_list[i].checked)
-        {
-            array_chosen[i] = true;
+        if(checkbox[i])
             checkCount++;
-        }
-        else 
-            array_chosen[i] = false;
-        
+
         i++;
     }
 
     if(checkCount == product_list.length) document.getElementById("choose_all").checked = true;
     else document.getElementById("choose_all").checked = false;
 
-    calculate_Value(array_chosen);
+    calculate_Value(checkbox);
     setChosenProduct(checkCount);
 }
 
@@ -80,29 +70,30 @@ function calculate_Value(array = null)
 {
     var newValue = 0;
     var i = 0;
-    if(!array)
-    {
-        if(document.getElementById('choose_all').checked)
-        {
-            while(true)
-            {
-                if(i > document.getElementsByName('choose').length-1) break;
 
-                newValue += getItemValue(i);
-                i++
-            }
-        }
-    }
-    else
+    if(document.getElementById('choose_all').checked)
     {
         while(true)
         {
             if(i > document.getElementsByName('choose').length-1) break;
 
-            if(array[i])
-                newValue += getItemValue(i);
-            i++
-        }  
+            newValue += getItemValue(i);
+            i++;
+        }
+    }
+    else
+    {
+        if(array)
+        {
+            while(true)
+            {
+                if(i > document.getElementsByName('choose').length-1) break;
+                
+                if(array[i])
+                    newValue += getItemValue(i);
+                i++;
+            }
+        }
     }
 
     var newTotal = document.createElement('span');
@@ -113,7 +104,7 @@ function calculate_Value(array = null)
 
 /**
  * update checkbox checked count
- * @param {table line} number 
+ * @param {product chosen} number 
  */
 function setChosenProduct(number)
 {
@@ -129,7 +120,9 @@ function setChosenProduct(number)
  */
 function clickChangeButton(number)
 {
-    if(document.getElementsByName('amount')[number].value == lastAmount_arr[number])
+    var elementAmount = document.getElementsByName('amount')[number];
+
+    if(elementAmount.value == elementAmount.getAttribute('class'))
     {
         alert('수량이 변경되지 않았습니다.');
         return;
@@ -141,10 +134,128 @@ function clickChangeButton(number)
     item_value.appendChild(document.createTextNode(getItemValue(number)));
     document.getElementsByName('item_value')[number].replaceChild(item_value, document.getElementsByName('value_data')[number]);
     
-    product_list[number].checked = true;
-    update_Choose_Product();
+    elementAmount.setAttribute('class', elementAmount.value);
     
-    lastAmount_arr[number] = document.getElementsByName('amount')[number].value;
+    product_list[number].checked = true;
+    update_Choose_Product();    
+}
+
+/**
+ * activity when clicked remove button
+ */
+function clickRemoveButton()
+{
+    var checkedBoxList = makeupCheckboxList();
+    var line = document.getElementsByName('table_line');
+    var i = checkedBoxList.length-1;
+
+    while(true)
+    {
+        if(i < 0) break;
+
+        if(checkedBoxList[i])
+        {
+            line[i].parentNode.removeChild(line[i]);
+            newLength --;
+        }
+        i--;
+    }
+    // 여기에 global 변수와 array위치 갱신할 필요 존재
+    calculate_Value();
+    setChosenProduct(0);
+
+    /**
+     * 여기에 삭제하기 눌렀을 때 php 서버를 통한 update 과정 추가 필요
+     */
+}
+
+/**
+ * activity when clicked order button
+ */
+function clickOrderButton()
+{
+    var checkedBoxList = makeupCheckboxList();
+    var buyer_id = document.getElementById("buyer_id").value;
+    var textType = /[0-9a-zA-Z]/;
+    var isChecked = false;
+    var isEngId = false;
+    var i = 0;
+
+    while(true)
+    {
+        if(i > checkedBoxList.length -1) break;
+
+        if(checkedBoxList[i])
+            isChecked = true;
+
+        i++;
+    }
+    
+    i = 0;
+    while(true)
+    {
+        if(i > buyer_id.length - 1) break;
+
+        if(textType.test(buyer_id.charAt(i)))
+            isEngId = true;
+        else
+        {
+            isEngId = false;
+            break;
+        }
+        console.log(buyer_id.charAt(i));
+        i++;
+    }
+
+    // both checkbox and input type check
+    if(!isChecked && !isEngId)
+    {
+        alert("아이디는 영문자로 입력하시고, 체크 박스도 선택해주세요.");
+        return;
+    }
+
+    // checkbox clicked check
+    if(!isChecked)
+    {
+        alert("체크 박스를 선택해주세요.");
+        return;
+    }
+    
+    // id input type english check
+    if(!isEngId)
+    {
+        alert("아이디는 영문자로 입력해주세요.");
+        return;
+    }
+
+    // 구현필요
+    /**
+     * php 호출을 통한 validation 실행 및 서버에 기록 업데이트
+     */
+}
+
+/**
+ * make checkbox list
+ */
+function makeupCheckboxList()
+{
+    var product_list = document.getElementsByName('choose');
+    var array_chosen = new Array(product_list.length);
+    var i = 0;
+
+    while(true)
+    {
+        if(i > array_chosen.length - 1) break;
+
+        if(product_list[i].checked)
+            array_chosen[i] = true;
+        else 
+            array_chosen[i] = false;
+
+        i++;
+    }
+
+    return array_chosen;
 }
 
 /**

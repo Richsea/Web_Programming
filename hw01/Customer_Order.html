@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>도서 주문 페이지</h1>
-    <span><p id="buyer_id">구매자 아이디 : <input type="text"></p></span>
+    <span><p>구매자 아이디 : <input type="text" id="buyer_id"></p></span>
     
     <table id="order_box">
         <input type="checkbox" id="choose_all" onclick="update_Choose_All()">모두 선택
@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody id="tbody" name="tbody">
-                <?php
+            <?php
                 $filename = "./data/booklist.txt";
                 $fp = fopen($filename, "r");
                 while(!feof($fp))
@@ -45,18 +45,19 @@
                 function write_Table($book_data, $obj_num)
                 {
                     $list_book_atr = explode("|", $book_data);
-                    $item_value = htmlspecialchars($list_book_atr[1]) * htmlspecialchars($list_book_atr[2]);
+                    $amount = $list_book_atr[2];
+                    $item_value = htmlspecialchars($list_book_atr[1]) * $amount;
 
-                    echo "<tr>";
+                    echo "<tr name='table_line'>";
                     echo "<td><input type='checkbox' name='choose' onclick='update_Choose_Product();'></td>";
                     echo "<td><span name='pname'>" . htmlspecialchars($list_book_atr[0]) . "</span></td>";
-                    echo "<td><button><a href='" . htmlspecialchars($list_book_atr[3]) . "'>미리보기</a></button></td>";
+                    echo "<td><button><a target='_blank' href='" . htmlspecialchars($list_book_atr[3]) . "'>미리보기</a></button></td>";
                     echo "<td><span name='price'>" . htmlspecialchars($list_book_atr[1]) . "</span></td>";
-                    echo "<td><input type='number' name='amount' value='" . htmlspecialchars($list_book_atr[2]) . "' max='" . htmlspecialchars($list_book_atr[2]) . "' min='0' oninput='isUnderMax(" . $obj_num . ");'><input type='button' value='변경' onclick='clickChangeButton(" . $obj_num . ");'></td>";
+                    echo "<td><input type='number' name='amount' class='" . htmlspecialchars($amount) . "' value='" . htmlspecialchars($amount) . "' max='" . htmlspecialchars($amount) . "' min='0' oninput='isUnderMax(" . $obj_num . ");'><input type='button' value='변경' onclick='clickChangeButton(" . $obj_num . ");'></td>";
                     echo "<td name='item_value'><span name='value_data'>" . $item_value . "</span></td>";
                     echo "</tr>";
                 }
-                ?>        
+            ?>        
         </tbody>
         <tfoot>
             <tr>
@@ -66,9 +67,9 @@
         </tfoot>
     </table>
 
-    <div id="chosen">총 <span id="chosen_data"><?php echo htmlspecialchars(0); ?></span>개 상품 선택</div>
-    <span><input type="button" value="삭제하기"><input type="button" value="주문하기"></span>
-    <!--<?php include './Read_product.php';?>-->
+    <div id="chosen">총 <span id="chosen_data" name="chosen_data"><?php echo htmlspecialchars(0); ?></span>개 상품 선택</div>
+    <span><input type="button" value="삭제하기" onclick="clickRemoveButton();"><input type="button" value="주문하기" onclick="clickOrderButton();"></span>
+    <span id="add_php"><!--<?php include './Read_product.php';?>--></span>
     <script src="Read_product.js"></script>
 </body>
 </html>
