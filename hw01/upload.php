@@ -2,9 +2,9 @@
 // data file directory :: can save only txt
 $data_dir = "./data/";
 $data_file = fopen($data_dir . "booklist.txt", 'a+');
-$book_name = $_POST['pname'];
-$book_price = $_POST['price'];
-$book_amount = $_POST['amount'];
+$book_name = htmlspecialchars($_POST['pname']);
+$book_price = htmlspecialchars($_POST['price']);
+$book_amount = htmlspecialchars($_POST['amount']);
 
 // img file directory :: can save .jpg, .jpeg, .png, .gif
 $img_dir = "./uploads/";
