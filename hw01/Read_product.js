@@ -4,7 +4,7 @@
  */
 function update_Choose_All()
 {
-    var product_list = document.getElementsByName('choose');
+    var product_list = document.getElementsByName('choose[]');
     var i = 0;
 
     if(!document.getElementById('choose_all').checked)
@@ -39,7 +39,7 @@ function update_Choose_All()
  */
 function update_Choose_Product()
 {
-    var product_list = document.getElementsByName('choose');
+    var product_list = document.getElementsByName('choose[]');
     var checkCount = 0;     // for choosed product count
     var i = 0;
 
@@ -75,7 +75,7 @@ function calculate_Value(array = null)
     {
         while(true)
         {
-            if(i > document.getElementsByName('choose').length-1) break;
+            if(i > document.getElementsByName('choose[]').length-1) break;
 
             newValue += getItemValue(i);
             i++;
@@ -87,7 +87,7 @@ function calculate_Value(array = null)
         {
             while(true)
             {
-                if(i > document.getElementsByName('choose').length-1) break;
+                if(i > document.getElementsByName('choose[]').length-1) break;
                 
                 if(array[i])
                     newValue += getItemValue(i);
@@ -120,7 +120,7 @@ function setChosenProduct(number)
  */
 function clickChangeButton(number)
 {
-    var elementAmount = document.getElementsByName('amount')[number];
+    var elementAmount = document.getElementsByName('amount[]')[number];
 
     if(elementAmount.value == elementAmount.getAttribute('class'))
     {
@@ -128,7 +128,7 @@ function clickChangeButton(number)
         return;
     }
 
-    var product_list = document.getElementsByName('choose');
+    var product_list = document.getElementsByName('choose[]');
     var item_value = document.createElement('span');
     item_value.setAttribute('name', 'value_data');
     item_value.appendChild(document.createTextNode(getItemValue(number)));
@@ -156,17 +156,12 @@ function clickRemoveButton()
         if(checkedBoxList[i])
         {
             line[i].parentNode.removeChild(line[i]);
-            newLength --;
         }
         i--;
     }
     // 여기에 global 변수와 array위치 갱신할 필요 존재
     calculate_Value();
     setChosenProduct(0);
-
-    /**
-     * 여기에 삭제하기 눌렀을 때 php 서버를 통한 update 과정 추가 필요
-     */
 }
 
 /**
@@ -207,6 +202,9 @@ function clickOrderButton()
         i++;
     }
 
+    var order = document.getElementById('order_work');
+    order.setAttribute('value', 'false');
+
     // both checkbox and input type check
     if(!isChecked && !isEngId)
     {
@@ -228,10 +226,8 @@ function clickOrderButton()
         return;
     }
 
-    // 구현필요
-    /**
-     * php 호출을 통한 validation 실행 및 서버에 기록 업데이트
-     */
+    // all check is clear
+    order.setAttribute('value', 'true');
 }
 
 /**
@@ -239,7 +235,7 @@ function clickOrderButton()
  */
 function makeupCheckboxList()
 {
-    var product_list = document.getElementsByName('choose');
+    var product_list = document.getElementsByName('choose[]');
     var array_chosen = new Array(product_list.length);
     var i = 0;
 
@@ -264,11 +260,11 @@ function makeupCheckboxList()
  */
 function isUnderMax(number)
 {
-    var max_value = document.getElementsByName('amount')[number].getAttribute('max');
-    var current_value = document.getElementsByName('amount')[number].value;
+    var max_value = document.getElementsByName('amount[]')[number].getAttribute('max');
+    var current_value = document.getElementsByName('amount[]')[number].value;
     if(Number(current_value) > Number(max_value))
     {
-        document.getElementsByName('amount')[number].value = Number(max_value);
+        document.getElementsByName('amount[]')[number].value = Number(max_value);
     }
 }
 
@@ -278,5 +274,16 @@ function isUnderMax(number)
  */
 function getItemValue(number)
 {
-    return document.getElementsByName('price')[number].textContent * document.getElementsByName('amount')[number].value;
+    return document.getElementsByName('price')[number].textContent * document.getElementsByName('amount[]')[number].value;
+}
+
+
+/**
+ * check submit is ok
+ */
+function submitCheck()
+{
+    if(document.getElementById('order_work').value == 'true')
+        return true;
+    return false;
 }
