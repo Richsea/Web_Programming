@@ -1,0 +1,24 @@
+first_obj|10
+third one|12
+first_obj|10
+third one|12
+first_obj|10
+third one|12
+first_obj|10
+third one|12
+first_obj|10
+third one|12
+first_obj|10
+third one|12
+first_obj|10
+third one|12
+first_obj|10
+third one|12
+first_obj|10
+third one|12
+first_obj|10
+third one|12
+first_obj|10
+third one|12
+first_obj|10
+third one|12
