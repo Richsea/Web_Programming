@@ -1,3 +1,0 @@
-first_obj|10|100|./uploads/desktop_placeholder.jpg
-second_obj|15|22|./uploads/broadcast_live_grey.png
-third one|1112|333|./uploads/icon_mic_disabled.png

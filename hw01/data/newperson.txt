@@ -1,3 +1,0 @@
-first_obj|10
-second_obj|2
-third one|1
