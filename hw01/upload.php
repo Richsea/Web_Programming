@@ -35,7 +35,6 @@ else
 {
     if(move_uploaded_file($_FILES["update_file"]["tmp_name"], $img_file))
     {
-        chmod($img_file, 777);  // 계속 관리자 권한으로 들어가는 문제 해결 필요..
         fwrite($data_file, $book_name . '|' . $book_price . '|' . $book_amount . '|' . $img_file . "\r\n");
         echo("<script>location.replace('./Saved.html');</script>");
     }
