@@ -116,17 +116,18 @@ function setChosenProduct(number)
 
 /**
  * activity when clicked change button
- * @param {table line} number 
  */
-function clickChangeButton(number)
+function clickChangeButton()
 {
-    var elementAmount = document.getElementsByName('amount[]')[number];
-
+    var elementAmount = event.target.parentNode.firstChild;
+    
     if(elementAmount.value == elementAmount.getAttribute('class'))
     {
         alert('수량이 변경되지 않았습니다.');
         return;
     }
+
+    var number = getLineNum(elementAmount);
 
     var product_list = document.getElementsByName('choose[]');
     var item_value = document.createElement('span');
@@ -258,8 +259,12 @@ function makeupCheckboxList()
  * check and don't let input number datas are over the maximum range
  * @param {table line} number 
  */
-function isUnderMax(number)
+function isUnderMax()
 {
+    var eventNode = event.target.parentNode.firstChild;
+    var max_value = eventNode.getAttribute('max');
+    var number = getLineNum(eventNode);
+    
     var max_value = document.getElementsByName('amount[]')[number].getAttribute('max');
     var current_value = document.getElementsByName('amount[]')[number].value;
     if(Number(current_value) > Number(max_value))
@@ -275,6 +280,21 @@ function isUnderMax(number)
 function getItemValue(number)
 {
     return document.getElementsByName('price')[number].textContent * document.getElementsByName('amount[]')[number].value;
+}
+
+/**
+ * get line number when event occur in amount table
+ * @param {event Node} e 
+ */
+function getLineNum(e)
+{
+    var nodeList = document.getElementsByName('amount[]');
+    
+    for(var i = 0; i < nodeList.length; i++)
+    {
+        if(e.isEqualNode(nodeList[i]))
+            return i;
+    }
 }
 
 

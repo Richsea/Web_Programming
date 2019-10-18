@@ -56,7 +56,7 @@
                     echo "<td><input type='hidden' name='pname[]' value='" . $pname . "'>" . $pname . "</td>";
                     echo "<td><button><a target='_blank' href='" . htmlspecialchars($list_book_atr[3]) . "'>미리보기</a></button></td>";
                     echo "<td><span name='price'>" . htmlspecialchars($list_book_atr[1]) . "</span></td>";
-                    echo "<td><input type='number' name='amount[]' class='" . $amount . "' value='" . $amount . "' max='" . $amount . "' min='0' oninput='isUnderMax(" . $obj_num . ");'><input type='button' value='변경' onclick='clickChangeButton();'></td>";
+                    echo "<td><input type='number' name='amount[]' class='" . $amount . "' value='" . $amount . "' max='" . $amount . "' min='0' oninput='isUnderMax();'><input type='button' value='변경' onclick='clickChangeButton();'></td>";
                     echo "<td name='item_value'><span name='value_data'>" . $item_value . "</span></td>";
                     echo "</tr>";
                 }
