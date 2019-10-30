@@ -1,0 +1,71 @@
+div
+{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+#out_frame
+{
+    width: 50%;
+}
+
+#header
+{
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center; 
+    border-width: 15px;
+    border-style: outset;
+    border-color: #8afee2;
+    background-color: #74dada;
+    font-size: 50px;
+    letter-spacing: 3px;
+    padding: 20px;
+}
+
+#highlight_skyblue
+{
+    background-color: skyblue;
+}
+
+a:link
+{
+    color: blue;
+}
+a:visited
+{
+    color: red; 
+}
+a:active
+{
+    color: green;
+}
+a:hover
+{
+    color: orange;
+}
+
+#pathfind
+{
+    text-indent: 20px;
+    font-style: italic;
+}
+
+iframe
+{
+    border-radius: 1em;
+    width: 100%;
+    height: 300px;
+}
+
+#footer
+{
+    color: white;
+    background-color: gray;
+    border-top: 7px solid #bcbcbc;
+}
+
+.footer
+{
+    margin: 10px;
+}

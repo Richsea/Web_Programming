@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>MidTerm_2</title>
+    <link rel="stylesheet" type="text/css" href="MidTerm_2.css"/>
+</head>
+<body>
+    <div id="createTable" class="section">
+        <h1>테이블 만들기</h1>
+        <div><input type="number" id="row">열,<input type="number" id="column">행</div>
+        <input type="button" id="createButton" value="테이블 만들기">
+    </div>
+
+    <div id="create_Column_Row" class="section">
+        <h1>새로운 행 또는 열 추가하기</h1>
+        <div><input type="radio" value="addRow" name="addLine[]">열<input type="radio" value="addCol" name="addLine[]">행</div>
+        <div>
+            <span>추가할 위치: <input type="number"></span>
+        </div>
+        <input type="button" value="추가" onclick="addRowCol();">
+    </div>
+
+    <div id="addContent" class="section">
+        <h1>내용 추가하기</h1>
+        <div><input type="button" value="추가" onclick=""></div>
+    </div>
+
+
+    <div id="showTable">
+
+    </div>
+    <script src="MidTerm_2.js"></script>
+</body>
+</html>

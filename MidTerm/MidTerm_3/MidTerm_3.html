@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>MidTerm_3</title>
+</head>
+<body>
+    <h1>회원 가입 양식</h1>
+
+    <form action="./MidTerm_3.php" method="POST" enctype="multipart/form-data" onsubmit="return submitButton();">
+        <div>아이디: <input type="text" id="id" name="id"></div>
+        <div>이름: <input type="text" id="name" name="name"></div>
+        <div>전화번호: <input type="text" id="phone" name="phone"></div>
+        <div>성별: <input type="radio" value="female" name="gender[]">여자 <input type="radio" value="male" name="gender[]">남자</div>
+        <div>관심 있는 분야: <input type="checkbox" value="movie" name="hobby[]">영화 <input type="checkbox" value="music" name="hobby[]">음악 <input type="checkbox" value="game" name="hobby[]">게임 <input type="checkbox" value="coding" name="hobby[]">코딩</div>
+        <input type="submit">
+    </form>
+
+    <script src="MidTerm_3.js"></script>
+</body>
+</html>
