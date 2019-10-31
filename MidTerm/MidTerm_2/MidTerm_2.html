@@ -8,28 +8,30 @@
 <body>
     <div id="createTable" class="section">
         <h1>테이블 만들기</h1>
-        <div><input type="number" id="row">열,<input type="number" id="column">행</div>
-        <input type="button" id="createButton" value="테이블 만들기">
+        <div><input type="number" id="row">행,<input type="number" id="column">열</div>
+        <input type="button" value="테이블 만들기" onclick="createTable()">
     </div>
 
     <div id="create_Column_Row" class="section">
         <h1>새로운 행 또는 열 추가하기</h1>
-        <div><input type="radio" value="addRow" name="addLine[]">열<input type="radio" value="addCol" name="addLine[]">행</div>
+        <div><input type="radio" value="addRow" name="addLine[]">행<input type="radio" value="addCol" name="addLine[]">열</div>
         <div>
-            <span>추가할 위치: <input type="number"></span>
+            <span>추가할 위치: <input type="number" id="addLoc"></span>
         </div>
         <input type="button" value="추가" onclick="addRowCol();">
     </div>
 
     <div id="addContent" class="section">
         <h1>내용 추가하기</h1>
-        <div><input type="button" value="추가" onclick=""></div>
+        <div>
+            <input type="number" id="contentCol">열, <input type="number" id="contentRow">행
+            <br/><br/>
+            추가 할 내용:<input type="text" id="content">
+            <br/><br/>
+            <input type="button" value="추가" onclick="addContent();">
+        </div>
     </div>
-
-
-    <div id="showTable">
-
-    </div>
+    <div id="showTable"></div>
     <script src="MidTerm_2.js"></script>
 </body>
 </html>
