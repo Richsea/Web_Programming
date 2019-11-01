@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>성적 처리 페이지</h1>
-    <form action="./MidTerm_3.php" method="POST" enctype="multipart/form-data" onsubmit="return submitButton();">
+    <form action="./saveData.php" method="POST" enctype="multipart/form-data" onsubmit="return validationCheck();">
         <table>
             <tr id="thead">
                 <td>과목명</td>
@@ -35,6 +35,8 @@
                     {
                         write_table($scoreList[$i], $i);
                     }
+                    echo "<tr><td colspan=4 class='bold_h2'>총 계</td><td id='totalAmount'><span></span></td></tr>";
+                    echo "<tr><td colspan=4 class='bold_h2'>총 평점</td><td id='averageScore'><span></span></td></tr>";
                 }
 
                 function write_Table($score)
@@ -43,21 +45,52 @@
                     $sname = htmlspecialchars($explode_data[0]);
                     $credit = htmlspecialchars($explode_data[1]);
                     $grade = htmlspecialchars($explode_data[2]);
-                    $attendance = htmlspecialchars($explode_data[3]);
+                    $attendance = preg_replace("/[^0-9]*/s", "", htmlspecialchars($explode_data[3]));
 
-                    echo "<td>" . $sname . "</td>";
-                    echo "<td>" . $credit . "</td>";
-                    echo "<td><select><option value='A'>A</option><option value='B'>B</option><option value='C'>C</option><option value='D'>D</option></select><option value='F'>F</option></td>";
-                    echo "<td><input type='number' value='" . $attendance ."'></td>";
-
-
-
+                    echo "<tr>";
+                    echo "<td><input type='hidden' name='sname_hidden[]' value='" . $sname . "'>" . $sname . "</td>";
+                    echo "<td name='credit[]'><input type='hidden' name='credit_hidden[]' value='" . $credit . "'>" . $credit . "</td>";
+                    createSelect($grade);
+                    echo "<td><input type='number' name='attendance[]' value='" . $attendance . "'></td>";
+                    echo "<td name='subTotal[]'><span>" . getSubTotal($grade, $credit) . "</span></td>";
+                    echo "</tr>";
                 }
 
-                
+                function getSubTotal($score, $credit)
+                {
+                    $score_point = array(
+                        'A' => 4.0,
+                        'B' => 3.0,
+                        'C' => 2.0,
+                        'D' => 1.0,
+                        'F' => 0
+                    );
+
+                    return $score_point[$score] * $credit;
+                }
+
+                function createSelect($grade)
+                {
+                    $grade_array = ["A", "B", "C", "D", "F"];
+                    
+                    echo "<td><select name='grade[]' onchange='changeGradeSelect()'>";
+                    foreach ($grade_array as &$value)
+                    {
+                        if($value == $grade)
+                        {
+                            echo "<option value='" . $grade . "' selected='selected'>" . $grade . "</option>";
+                        }
+                        else
+                        {
+                            echo "<option value='" . $value . "'>" . $value . "</option>";
+                        }
+                    }
+                    echo "</td></select>";
+                }
             ?>
         </table>
-        <input type="submit">
+        <br/><br/>
+        <input type="submit" value="저장하기">
     </form>
     <script src="MidTerm_4.js"></script>
 </body>
