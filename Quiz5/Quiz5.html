@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>Quiz5</title>
+    <link rel="stylesheet" type="text/css" href="Quiz5.css"/>
+</head>
+<body>
+    <h1>HTML API</h1>
+    
+    <img id="drag1" src="https://www.w3schools.com/html/img_logo.gif" draggable="true" ondragstart="drag(event)" width="336" height="69">
+    <div><input type="button" value="Read" onclick="readLocalStorage()"></div>
+    <div id="dragBox">
+        <div class="box" id="dropX">DropX</div>
+        <div class="box" id="box1" ondrop="drop(event)" ondragover="allowDrop(event)">Box 1</div>
+        <div class="box" id="box2" ondrop="drop(event)" ondragover="allowDrop(event)">Box 2</div>
+    </div>
+
+    <script src="Quiz5.js"></script>
+</body>
+</html>
