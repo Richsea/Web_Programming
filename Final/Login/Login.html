@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Login page</title>
+    <link type="text/css" rel="stylesheet" href="loginStyle.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	<form actino="./Login.php" method="POST" enctype="multipart/form-data" onsubmit="dataCheck();">
+        <table>
+            <tr>
+                <td>ID: </td>
+                <td><input class="input" type="text" id="id"/></td>
+            </tr>
+            <tr>
+                <td>Password: </td>
+                <td><input class="input" type="password" id="pw"/></td>
+            </tr>
+        </table>
+		<div>
+			<span style="padding-right: 20px"><input type="submit"  name="sign_in" value="sign in"/></span>
+			<span><input type="submit" name="sign_up" value="sign up" formaction="./SignUp.html"/></span>
+        </div>
+    </form>
+    <script src="check.js"></script>
+</body>
+</html>
