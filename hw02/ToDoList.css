@@ -1,0 +1,41 @@
+#add_Todo_Button
+{
+    float: left;
+}
+
+#login_Button
+{
+    float: right;
+}
+
+#join_submit
+{
+    float: left;
+    margin-left: 10%;
+}
+
+#join_signIn
+{
+    float: right;
+    margin-right: 10%;
+}
+
+#join_table
+{
+    background-color: lightskyblue;
+    border-style: outset;
+    border-color: skyblue;
+    border-width: 3px;
+    padding: 10px;
+}
+
+.login_Block
+{
+    float: left;
+    margin-right: 10px;
+}
+
+#login_Block
+{
+
+}
