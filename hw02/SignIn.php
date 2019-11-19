@@ -1,5 +1,5 @@
 <?php
-    $data_dir = "./Login/";
+    $data_dir = "./Data/";
 
     if(!is_dir($data_dir)){ mkdir($data_dir, 777); }
 

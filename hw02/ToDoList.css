@@ -1,10 +1,11 @@
+#list_div
+{
+    margin-bottom: 15%;
+}
+
 #add_Todo_Button
 {
     float: left;
-}
-#login_name{
-    width: 30px;
-    height:10px;
 }
 
 #login_Button
@@ -12,39 +13,57 @@
     float: right;
 }
 
-#join_submit
+.box_button
 {
     float: left;
-    margin-left: 10%;
-}
-
-#join_signIn
-{
-    float: right;
+    margin-left: 2%;
     margin-right: 10%;
+    margin-top: 10px;
 }
 
-#join_table
+#form_box
 {
     background-color: lightskyblue;
     border-style: outset;
     border-color: skyblue;
     border-width: 3px;
     padding: 10px;
+    position: relative;
 }
 
-#login_Box
+#login_Box, #addList_Box/*, #toDo_div*/
 {
     display: none;
 }
 
-.login_Block
+.block_area
 {
     float: left;
+    margin-left: 10px;
     margin-right: 10px;
 }
 
-#login_Block
+#toDoList
 {
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
+    border-collapse: collapse;
+    width: 100%;
+}
 
+#thead
+{
+    text-align: center;
+    font-weight: bold;
+}
+
+#toDoList td
+{
+    border: 1px solid black;
+}
+
+#toDoTitle td
+{
+    width: 14%;
+    height: 150px;
 }

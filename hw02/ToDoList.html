@@ -10,13 +10,45 @@
 <body>
 	<div id="list_div">
 	<div id="add_Todo_Button">
-		<input type="button" value="Add"/>
+		<input type="button" class="block_area" value="Add" onclick="showToDoBlock()"/>
+		<span class="block_area" id="addList_Box">
+			<form method="POST" onsubmit="return todoList_Info_Check()">
+			<table id="form_box">
+				<tr>
+					<td>day</td>
+					<td><select name="day">
+						<option value="Sun" selected>Sun</option>
+						<option value="Mon">Mon</option>
+						<option value="Tue">Tue</option>
+						<option value="Wed">Wed</option>
+						<option value="Thu">Thu</option>
+						<option value="Fri">Fri</option>
+						<option value="Sat">Sat</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>title</td>
+					<td><input type="text" id="add_title" name="add_title"></td>
+				</tr>
+				<tr>
+					<td>description</td>
+					<td><input type="text" id="add_desc" name="add_desc"></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="Save" class="box_button" formaction="./SaveToDoList.php"></td>
+					<td><input type="button" value="Cancel" class="box_button" onclick="closeToDoBlock()"></td>
+				</tr>
+			</table>
+			<input type="hidden" name="current_id"/>
+			</form>
+			
+		</span>
 	</div>
 
 	<div id="login_Button">
-		<span class="login_Block" id="login_Box">
-			<form method="POST">
-			<table id="join_table">
+		<span class="block_area" id="login_Box">
+			<form method="POST" onsubmit="return login_Info_Check()">
+			<table id="form_box">
 				<tr>
 					<td>id</td>
 					<td><input type="text" id="user_id" name="user_id"></td>
@@ -28,14 +60,14 @@
 				<tr>
 					<td></td>
 					<td>
-						<input type="button" value="Submit" id="join_submit" onclick="login_Info_Check()">
-						<input type="submit" value="SignIn" id="join_signIn" onclick="login_Info_Check()" formaction="./SignIn.php">
+						<input type="button" value="Submit" class="box_button" onclick="login_Ajax()">
+						<input type="submit" value="SignIn" class="box_button" formaction="./SignIn.php">
 					</td>
 				</tr>
 			</table>
 			</form>
 		</span>
-		<span class="login_Block" id="login_Block"s>
+		<span class="block_area">
 			<span id="login_name"></span>
 			<input type="button" value="Join" onclick="showLoginBlock()"/>
 			<input type="button" value="Logout"/>
@@ -44,6 +76,29 @@
 	<br/>
 	</div>
 	
+	<div id="toDo_div">
+		<table id="toDoList">
+			<tr id="thead">
+				<td>Sun</td>
+				<td>Mon</td>
+				<td>Tue</td>
+				<td>Wed</td>
+				<td>Thu</td>
+				<td>Fri</td>
+				<td>Sat</td>
+			</tr>
+			<tr id="toDoTitle">
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+
+	</div>
 	<script src="ToDoList.js"></script>
 </body>
 </html>
