@@ -39,6 +39,7 @@ function login_Ajax()
             let account = data.split(/\n|\|/g);
             $("#login_name").text("");
             login(account);
+            showToDoList();
             closeLoginBlock();
         }
         else
@@ -64,6 +65,7 @@ function login(accounts)
             if($.trim(accounts[i*2+1]) !== $.trim(pw)) break;
             sessionStorage.setItem("id", id);
             $("#login_name").text(id);
+            $("#login_success").val(id);
 
             return;
         }
@@ -122,11 +124,63 @@ function todoList_Info_Check()
 }
 
 /**
- * toDo_List Check
+ * toDo_Info Block control
  */
+function init_toDoBlock()
+{
+    /*
+    alert("hi");
+    $(select[name=info_day].attr('disabled', true));
+    */
+}
+
+/**
+ * toDo_List control
+ */
+function showToDoList()
+{
+    $("#toDo_div").css("display", "block");
+    init_toDoList();
+}
+
 function init_toDoList()
 {
-    
+    let day_arr;
+
+    $("#toDo_div").css("display", "block");
+
+    $.ajax({
+        url:"./UpdateToDo.php",
+        type:"POST",
+        data:$("form").serialize(), //data 전송
+        
+        success:function(data){
+            day_arr = JSON.parse(data);
+            applyData(day_arr);
+        },
+        error:function(xhr, status, error){
+            alert("fail! : " + xhr.status + " : " + xhr.statusText);
+        }
+    })
+}
+
+function applyData(arr)
+{
+    let keys = Object.keys(arr);
+
+    for(let key in arr)
+    {
+        console.log(key, arr[key]);
+        arr[key].forEach(function(val){
+            let id = val[0];
+            let title = val[1];
+            let desc = val[2];
+
+            let list = $('<li id=' + id + 'value=' + desc + '>'+ title + '</li>')
+            let parentNode = '#' + key;
+            $(parentNode).append(list);
+        });
+    }
 }
 
 /**
@@ -134,5 +188,12 @@ function init_toDoList()
  */
  window.onload = function()
  {
-    $("#login_name").text(sessionStorage.getItem("id"));
+    let id = this.sessionStorage.getItem("id");
+    $("#login_name").text(id);
+
+    if($.trim(id) != "")
+    {
+        $("#login_success").val(id);
+        showToDoList();
+    }
  }

@@ -5,10 +5,11 @@
     $id = htmlspecialchars($_POST['current_id']);
     $title = htmlspecialchars($_POST['add_title']);
     $desc = htmlspecialchars($_POST['add_desc']);
+    $data_id = date('ymdhis');
 
     $data_file = fopen($data_dir . $id . "_" . $day . ".txt", "a+");
 
-    $inputData = $id . "|" . $title . "|" . $desc . "\r\n";
+    $inputData = $data_id . "|" . $title . "|" . $desc . "\r\n";
 
     fwrite($data_file, $inputData);
     echo "<script>location.replace('./ToDoList.html');</script>";

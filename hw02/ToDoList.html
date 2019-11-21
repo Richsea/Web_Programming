@@ -24,7 +24,7 @@
 						<option value="Thu">Thu</option>
 						<option value="Fri">Fri</option>
 						<option value="Sat">Sat</option>
-					</select></td>
+						</select></td>
 				</tr>
 				<tr>
 					<td>title</td>
@@ -45,6 +45,43 @@
 		</span>
 	</div>
 
+	<div id="toDo_Info">
+		<span id="todoInfo_Box">
+			<form method="POST">
+			<table id="form_box">
+				<tr>
+					<td>day</td>
+					<td><select name="info_day">
+							<option value="Sun" selected>Sun</option>
+							<option value="Mon">Mon</option>
+							<option value="Tue">Tue</option>
+							<option value="Wed">Wed</option>
+							<option value="Thu">Thu</option>
+							<option value="Fri">Fri</option>
+							<option value="Sat">Sat</option>
+						</select></td>
+				</tr>
+				<tr>
+					<td>title</td>
+					<td><input type="text" id="info_title"></td>
+				</tr>
+				<tr>
+					<td>description</td>
+					<td><input type="text" id="info_desc"></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="button" value="Edit"/>
+						<input type="button" value="Delete"/>
+						<input type="button" value="Submit"/>
+						<input type="button" value="Cancel"/>
+					</td>
+				</tr>
+			</table>
+			</form>
+		</span>
+	</div>
+
 	<div id="login_Button">
 		<span class="block_area" id="login_Box">
 			<form method="POST" onsubmit="return login_Info_Check()">
@@ -61,14 +98,16 @@
 					<td></td>
 					<td>
 						<input type="button" value="Submit" class="box_button" onclick="login_Ajax()">
-						<input type="submit" value="SignIn" class="box_button" formaction="./SignIn.php">
+						<input type="submit" value="SignIn" class="box_button" formactio="./SignIn.php">
 					</td>
 				</tr>
 			</table>
 			</form>
 		</span>
 		<span class="block_area">
-			<span id="login_name"></span>
+			<form method="POST"><span id="login_name"></span><input type="hidden" id="login_success" name="login_success" value="none"></form>
+		</span>
+		<span class="block_area">
 			<input type="button" value="Join" onclick="showLoginBlock()"/>
 			<input type="button" value="Logout"/>
 		</span>
@@ -88,17 +127,17 @@
 				<td>Sat</td>
 			</tr>
 			<tr id="toDoTitle">
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><ul id="Sun"></ul></td>
+				<td><ul id="Mon"></ul></td>
+				<td><ul id="Tue"></ul></td>
+				<td><ul id="Wed"></ul></td>
+				<td><ul id="Thu"></ul></td>
+				<td><ul id="Fri"></ul></td>
+				<td><ul id="Sat"></ul></td>
 			</tr>
 		</table>
-
 	</div>
+
 	<script src="ToDoList.js"></script>
 </body>
 </html>
