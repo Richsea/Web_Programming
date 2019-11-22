@@ -40,7 +40,7 @@
     position: relative;
 }
 
-#login_Box, #addList_Box, #toDo_div/*, #loadData/*, #todoInfo_Box*/
+#login_Box, #addList_Box, #toDo_div, #todoInfo_Box
 {
     display: none;
 }

@@ -1,7 +1,6 @@
 <?php
     $data_dir = "./Data/";
     $id = $_POST['login_success'];
-    $data_Mon = fopen($data_dir . "person.txt", "a+");
     $day = array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
     $exist_day = array();
 
@@ -22,7 +21,6 @@
 
                 $toDoList[] = explode('|', $listData);
             }
-
             $exist_day[$value] = $toDoList;
         }   
     }

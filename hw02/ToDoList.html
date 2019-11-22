@@ -71,13 +71,14 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="button" value="Edit"/>
-						<input type="button" value="Delete"/>
-						<input type="button" value="Submit"/>
-						<input type="button" value="Cancel"/>
+						<input type="button" value="Edit" id="info_edit" onclick="clickEdit()"/>
+						<input type="button" value="Delete" id="info_delete" onclick="deleteList()"/>
+						<input type="button" value="Submit" id="info_submit"/>
+						<input type="button" value="Cancel" id="info_cancel" onclick="closeInfoBlock()"/>
 					</td>
 				</tr>
 			</table>
+			<input type="hidden" id="infoBoxId" value="">
 			</form>
 		</span>
 	</div>
@@ -98,7 +99,7 @@
 					<td></td>
 					<td>
 						<input type="button" value="Submit" class="box_button" onclick="login_Ajax()">
-						<input type="submit" value="SignIn" class="box_button" formactio="./SignIn.php">
+						<input type="submit" value="SignIn" class="box_button" formaction="./SignIn.php">
 					</td>
 				</tr>
 			</table>

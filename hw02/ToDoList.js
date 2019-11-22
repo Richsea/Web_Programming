@@ -38,8 +38,8 @@ function login_Ajax()
         {
             let account = data.split(/\n|\|/g);
             $("#login_name").text("");
-            login(account);
-            showToDoList();
+            if(login(account))
+                showToDoList();
             closeLoginBlock();
         }
         else
@@ -67,21 +67,23 @@ function login(accounts)
             $("#login_name").text(id);
             $("#login_success").val(id);
 
-            return;
+            return true;
         }
     }
 
     if(!idCheck)
     {
         alert("존재하지 않는 회원입니다.");
-        return;
+        return false;
     }
 
     if(!pwCheck)
     {
         alert("비밀번호가 일치하지 않습니다.");
-        return;
+        return false;
     }
+
+    return false;
 }
 
 /**
@@ -92,7 +94,7 @@ function showToDoBlock()
     let name = $("#login_name").text();
 
     if($.trim(name) == "")
-    {
+    {   
         alert("추가하기 위해 로그인 해주세요");
         return;
     }
@@ -126,12 +128,70 @@ function todoList_Info_Check()
 /**
  * toDo_Info Block control
  */
-function init_toDoBlock()
+function showInfoBlock(e)
 {
-    /*
-    alert("hi");
-    $(select[name=info_day].attr('disabled', true));
-    */
+    let event = e.target;
+    let day = $(event.parentNode).attr('id');
+    let id = $(event).attr("id");
+    $('#infoBoxId').val(id)                     // 현재 infoBox가 어떤 리스튼지 알 기 위해 저장
+    $('#todoInfo_Box').css("display", "block");
+    $("select[name=info_day]").val(day);
+    $("#info_title").val($(event).text());
+    $("#info_desc").val(sessionStorage.getItem(id));
+
+    // disable 기능
+    $("select[name=info_day]").attr('disabled', true);
+    $("#info_title").attr('disabled', true);
+    $("#info_desc").attr('disabled', true);
+    $("#info_submit").attr('disabled', true);
+}
+
+function closeInfoBlock()
+{
+    $('#infoBoxId').val("");
+    $("#info_title").val("");
+    $("#info_desc").val("");
+    $('#todoInfo_Box').css("display", "none");
+}
+
+function clickEdit()
+{
+    $("select[name=info_day]").attr('disabled', false);
+    $("#info_edit").attr('disabled', true);
+    $("#info_delete").attr('disabled', true);
+    $("#info_title").attr('disabled', false);
+    $("#info_desc").attr('disabled', false);
+    $("#info_submit").attr('disabled', false);
+}
+
+function deleteList()
+{
+    let currentToDo = $('#infoBoxId').val();
+    let id = $("#login_success").val();
+    let todoId = "#" + currentToDo;
+    let day = $(todoId).parents("ul").attr("id");
+
+    alert("삭제되었습니다");
+
+    $.ajax({
+        url:"./RemoveToDo.php",
+        type:"GET",
+        data:{
+            day : day,
+            id : id,
+            todoId : currentToDo
+        },
+
+        success:function(result){
+            day_arr = JSON.parse(result);
+            sessionStorage.removeItem(currentToDo);
+            closeInfoBlock();
+            applyData(day_arr);
+        },
+        error:function(xhr, status, error){
+            alert("fail! : " + xhr.status + " : " + xhr.statusText);
+        }
+    })
 }
 
 /**
@@ -156,7 +216,10 @@ function init_toDoList()
         
         success:function(data){
             day_arr = JSON.parse(data);
-            applyData(day_arr);
+            if(day_arr.length == 0)
+                alert("저장된 데이터가 없습니다");
+            else
+                applyData(day_arr);
         },
         error:function(xhr, status, error){
             alert("fail! : " + xhr.status + " : " + xhr.statusText);
@@ -170,15 +233,17 @@ function applyData(arr)
 
     for(let key in arr)
     {
-        console.log(key, arr[key]);
+        let parentNode = '#' + key;
+        $(parentNode).empty();
         arr[key].forEach(function(val){
             let id = val[0];
             let title = val[1];
             let desc = val[2];
 
-            let list = $('<li id=' + id + 'value=' + desc + '>'+ title + '</li>')
-            let parentNode = '#' + key;
+            let list = $('<li id=' + id + '>'+ title + '</li>')
             $(parentNode).append(list);
+
+            sessionStorage.setItem(id, desc);
         });
     }
 }
@@ -197,3 +262,11 @@ function applyData(arr)
         showToDoList();
     }
  }
+
+ document.getElementById('Sun').addEventListener('click', showInfoBlock);
+ document.getElementById('Mon').addEventListener('click', showInfoBlock);
+ document.getElementById('Tue').addEventListener('click', showInfoBlock);
+ document.getElementById('Wed').addEventListener('click', showInfoBlock);
+ document.getElementById('Thu').addEventListener('click', showInfoBlock);
+ document.getElementById('Fri').addEventListener('click', showInfoBlock);
+ document.getElementById('Sat').addEventListener('click', showInfoBlock);
