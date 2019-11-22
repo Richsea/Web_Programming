@@ -1,8 +1,8 @@
 <?php
     $data_dir = "./Data/";
-    $day = $_GET['day'];
-    $id = $_GET['id'];
-    $todoId = $_GET['todoId'];
+    $day = htmlspecialchars($_GET['day']);
+    $id = htmlspecialchars($_GET['id']);
+    $todoId = htmlspecialchars($_GET['todoId']);
 
     $filename = $data_dir . $id . "_" . $day . ".txt";
     $data_file = fopen($filename, "r");

@@ -143,6 +143,8 @@ function showInfoBlock(e)
     $("select[name=info_day]").attr('disabled', true);
     $("#info_title").attr('disabled', true);
     $("#info_desc").attr('disabled', true);
+    $("#info_edit").attr('disabled', false);
+    $("#info_delete").attr('disabled', false);
     $("#info_submit").attr('disabled', true);
 }
 
@@ -164,7 +166,30 @@ function clickEdit()
     $("#info_submit").attr('disabled', false);
 }
 
-function deleteList()
+function clickSubmit()
+{
+    let id = $("#login_success").val();
+    let past_toDo = $("#infoBoxId").val();
+    let past_day = $("#" + past_toDo).parents("ul").attr("id");
+    let day = $("select[name=info_day]").val();
+    let title = $("#info_title").val();
+    let desc = $("#info_desc").val();
+
+    if($.trim(title) == "" || $.trim(desc) == "")
+    {
+        alert("title과 description에 빈칸이 존재합니다.");
+        return;
+    }
+
+    alert("변경되었습니다.");
+
+    deleteList(id, past_day, past_toDo);
+    addList(id, day, title, desc);
+
+    //console.log(pastDay);
+}
+
+function clickDelete()
 {
     let currentToDo = $('#infoBoxId').val();
     let id = $("#login_success").val();
@@ -173,6 +198,36 @@ function deleteList()
 
     alert("삭제되었습니다");
 
+    deleteList(id, day, currentToDo);
+}
+
+function addList(id, day, title, desc)
+{
+    $.ajax({
+        url:"./SaveToDoList_ajax.php",
+        type:"GET",
+        data:{
+            current_id : id,
+            day : day,
+            add_title : title,
+            add_desc : desc
+        },
+
+        success:function(result){
+            day_arr = JSON.parse(result);
+            console.log(day_arr);
+            // sessionStorage.setItem()
+            closeInfoBlock();
+            applyData(day_arr);
+        },
+        error:function(xhr, status, error){
+            alert("fail! : " + xhr.status + " : " + xhr.statusText);
+        }
+    })
+}
+
+function deleteList(id, day, currentToDo)
+{
     $.ajax({
         url:"./RemoveToDo.php",
         type:"GET",
