@@ -1,15 +1,16 @@
-<!DOCTYPE>
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 	<head>
+		<meta charset="utf-8">
 		<title> 2019_2 웹 프로그래밍 실습 : JS Object와 Function</title>
-		<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 	<body>
 	 	책 제목 : <input type="text" id="title"><br><br>
-		가격 : <input type="number" id="price"><br><br>
-		<input type="radio" name="order" value="title_order">제목으로 정렬
-		<input type="radio" name="order" value="price_order">가격으로 정렬<br><br>
-		<input type="submit"><br><br>
+		가격 : <input type="number" id="price" min="0" value="0"><br><br>
+		<input type="radio" name="sort" value="title">제목으로 정렬
+		<input type="radio" name="sort" value="price">가격으로 정렬<br><br>
+		<input type="submit" onclick="search()"><br><br>
 		<table id="bb">
 			<tr>
 		    <td>web programming</td>
@@ -36,6 +37,11 @@
 		    <td>17000</td>
 		  </tr>
 		</table>
+		<div id="display">
+			<ul>
+
+			</ul>
+		</div>
 		<script src="./order.js"></script>
 </body>
 </html>
