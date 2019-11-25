@@ -131,8 +131,13 @@ function todoList_Info_Check()
 function showInfoBlock(e)
 {
     let event = e.target;
+
+    if($(event).prop('tagName') != "LI")
+        return;
+
     let day = $(event.parentNode).attr('id');
     let id = $(event).attr("id");
+
     $('#infoBoxId').val(id)                     // 현재 infoBox가 어떤 리스튼지 알 기 위해 저장
     $('#todoInfo_Box').css("display", "block");
     $("select[name=info_day]").val(day);
@@ -166,11 +171,11 @@ function clickEdit()
     $("#info_submit").attr('disabled', false);
 }
 
-function clickSubmit()
+async function clickSubmit()
 {
     let id = $("#login_success").val();
-    let past_toDo = $("#infoBoxId").val();
-    let past_day = $("#" + past_toDo).parents("ul").attr("id");
+    let toDoID = $("#infoBoxId").val();
+    let past_day = $("#" + toDoID).parents("ul").attr("id");
     let day = $("select[name=info_day]").val();
     let title = $("#info_title").val();
     let desc = $("#info_desc").val();
@@ -183,10 +188,9 @@ function clickSubmit()
 
     alert("변경되었습니다.");
 
-    deleteList(id, past_day, past_toDo);
-    addList(id, day, title, desc);
-
-    //console.log(pastDay);
+    let first = await deleteList(id, past_day, toDoID);
+    let second = await addList(id, day, title, desc, toDoID);
+    let third = await readDayList(id, day);
 }
 
 function clickDelete()
@@ -201,7 +205,7 @@ function clickDelete()
     deleteList(id, day, currentToDo);
 }
 
-function addList(id, day, title, desc)
+function addList(id, day, title, desc, toDoID)
 {
     $.ajax({
         url:"./SaveToDoList_ajax.php",
@@ -210,16 +214,13 @@ function addList(id, day, title, desc)
             current_id : id,
             day : day,
             add_title : title,
-            add_desc : desc
+            add_desc : desc,
+            toDo_id : toDoID
+        },
+        success:function(){
+            sessionStorage.setItem(toDoID, desc);
         },
 
-        success:function(result){
-            day_arr = JSON.parse(result);
-            console.log(day_arr);
-            // sessionStorage.setItem()
-            closeInfoBlock();
-            applyData(day_arr);
-        },
         error:function(xhr, status, error){
             alert("fail! : " + xhr.status + " : " + xhr.statusText);
         }
@@ -240,6 +241,27 @@ function deleteList(id, day, currentToDo)
         success:function(result){
             day_arr = JSON.parse(result);
             sessionStorage.removeItem(currentToDo);
+            closeInfoBlock();
+            applyData(day_arr);
+        },
+        error:function(xhr, status, error){
+            alert("fail! : " + xhr.status + " : " + xhr.statusText);
+        }
+    })
+}
+
+function readDayList(id, day)
+{
+    $.ajax({
+        url:"./ReadDay.php",
+        type:"GET",
+        data:{
+            current_id : id,
+            day : day
+        },
+
+        success:function(result){
+            day_arr = JSON.parse(result);
             closeInfoBlock();
             applyData(day_arr);
         },
@@ -284,8 +306,6 @@ function init_toDoList()
 
 function applyData(arr)
 {
-    let keys = Object.keys(arr);
-
     for(let key in arr)
     {
         let parentNode = '#' + key;
@@ -295,7 +315,7 @@ function applyData(arr)
             let title = val[1];
             let desc = val[2];
 
-            let list = $('<li id=' + id + '>'+ title + '</li>')
+            let list = $('<li id=' + id + ' class="draggable_li">'+ title + '</li>')
             $(parentNode).append(list);
 
             sessionStorage.setItem(id, desc);
@@ -304,10 +324,69 @@ function applyData(arr)
 }
 
 /**
+ * drag & drop
+ */
+$(function(){
+    $(".draggable_ul").sortable({
+        connectWith: ".draggable_ul",
+        cursor: "pointer",
+        
+        update: function(event, ui){
+            let past_day = $(ui.sender).attr("id");
+
+            if(past_day)
+            {
+                let id = $("#login_success").val();
+                let currentNode = $(ui["item"]);
+                let day = currentNode.parents().attr("id");
+                let toDoID = currentNode.attr("id");
+                // let title = $("#" + toDoID).text();
+                // let desc = sessionStorage.getItem(toDoID);
+                
+                // deleteList(id, past_day, toDoID);
+                modify_DayList(id, day);
+                // addList(id, day, title, desc);
+
+                // addList(id, day, title, desc, toDoID);
+                // readDayList(id, day);
+            }
+        },
+    }).disableSelection();
+});
+
+function modify_DayList(id, day)
+{
+    // remove all data
+    $.ajax({
+        url:"./RemoveAllDay.php",
+        type:"GET",
+        data:{
+            current_id : id,
+            day : day
+        },
+
+        error:function(xhr, status, error){
+            alert("fail! : " + xhr.status + " : " + xhr.statusText);
+        }
+    })
+
+    let nodeList = $("#" + day).children();
+
+    for(let i = 0; i < nodeList.length; i++)
+    {
+        let toDoID = $(nodeList[i]).attr("id");
+        addList(id, day, $(nodeList[i]).text(), sessionStorage.getItem(toDoID), toDoID);
+    }
+
+    readDayList(id, day);
+}
+
+
+/**
  * start when page load
  */
- window.onload = function()
- {
+window.onload = function()
+{
     let id = this.sessionStorage.getItem("id");
     $("#login_name").text(id);
 
@@ -316,12 +395,17 @@ function applyData(arr)
         $("#login_success").val(id);
         showToDoList();
     }
- }
+}
 
- document.getElementById('Sun').addEventListener('click', showInfoBlock);
- document.getElementById('Mon').addEventListener('click', showInfoBlock);
- document.getElementById('Tue').addEventListener('click', showInfoBlock);
- document.getElementById('Wed').addEventListener('click', showInfoBlock);
- document.getElementById('Thu').addEventListener('click', showInfoBlock);
- document.getElementById('Fri').addEventListener('click', showInfoBlock);
- document.getElementById('Sat').addEventListener('click', showInfoBlock);
+$(window).resize(function(){
+    var windowWidth= $(window).width();
+})
+
+
+document.getElementById('Sun').addEventListener('click', showInfoBlock);
+document.getElementById('Mon').addEventListener('click', showInfoBlock);
+document.getElementById('Tue').addEventListener('click', showInfoBlock);
+document.getElementById('Wed').addEventListener('click', showInfoBlock);
+document.getElementById('Thu').addEventListener('click', showInfoBlock);
+document.getElementById('Fri').addEventListener('click', showInfoBlock);
+document.getElementById('Sat').addEventListener('click', showInfoBlock);
