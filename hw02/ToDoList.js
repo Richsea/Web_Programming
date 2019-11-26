@@ -3,6 +3,8 @@
  */
 function showLoginBlock()
 {
+    if($.trim($("#login_name").text()) != "")
+        return;
     $("#login_Box").css("display", "block");
 }
 
@@ -84,6 +86,25 @@ function login(accounts)
     }
 
     return false;
+}
+
+function logOut()
+{
+    if($.trim($("#login_name").text()) == "")
+        return;
+    
+    sessionStorage.clear();
+    $("#login_name").text("");
+    $("#login_success").val("");
+
+    let day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    day.forEach(function(val){
+        let node = $("#"+val);
+        node.empty();
+    });
+
+    alert("로그아웃이 되었습니다.");
 }
 
 /**
