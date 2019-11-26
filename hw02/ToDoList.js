@@ -210,8 +210,14 @@ async function clickSubmit()
     alert("변경되었습니다.");
 
     let first = await deleteList(id, past_day, toDoID);
-    let second = await addList(id, day, title, desc, toDoID);
-    let third = await readDayList(id, day);
+    console.log(first["success"]);
+    if(first["success"]==="success"){
+        let second = await addList(id, day, title, desc, toDoID);
+
+        if(second["success"]==="success"){
+            let third = await readDayList(id, day);
+        }
+    }
 }
 
 function clickDelete()
@@ -228,68 +234,85 @@ function clickDelete()
 
 function addList(id, day, title, desc, toDoID)
 {
-    $.ajax({
-        url:"./SaveToDoList_ajax.php",
-        type:"GET",
-        data:{
-            current_id : id,
-            day : day,
-            add_title : title,
-            add_desc : desc,
-            toDo_id : toDoID
-        },
-        success:function(){
-            sessionStorage.setItem(toDoID, desc);
-        },
-
-        error:function(xhr, status, error){
-            alert("fail! : " + xhr.status + " : " + xhr.statusText);
-        }
-    })
+    return new Promise(function(resolve, reject){
+        $.ajax({
+            url:"./SaveToDoList_ajax.php",
+            type:"GET",
+            data:{
+                current_id : id,
+                day : day,
+                add_title : title,
+                add_desc : desc,
+                toDo_id : toDoID
+            },
+            success:function(){
+                sessionStorage.setItem(toDoID, desc);
+                resolve({
+                    "success":"success",
+                });
+            },
+    
+            error:function(xhr, status, error){
+                alert("fail! : " + xhr.status + " : " + xhr.statusText);
+            }
+        })
+    });
 }
 
 function deleteList(id, day, currentToDo)
 {
-    $.ajax({
-        url:"./RemoveToDo.php",
-        type:"GET",
-        data:{
-            day : day,
-            id : id,
-            todoId : currentToDo
-        },
-
-        success:function(result){
-            day_arr = JSON.parse(result);
-            sessionStorage.removeItem(currentToDo);
-            closeInfoBlock();
-            applyData(day_arr);
-        },
-        error:function(xhr, status, error){
-            alert("fail! : " + xhr.status + " : " + xhr.statusText);
-        }
-    })
+    return new Promise(function (resolve, reject){
+        $.ajax({
+            url:"./RemoveToDo.php",
+            type:"GET",
+            data:{
+                day : day,
+                id : id,
+                todoId : currentToDo
+            },
+    
+            success:function(result){
+                day_arr = JSON.parse(result);
+                sessionStorage.removeItem(currentToDo);
+                closeInfoBlock();
+                applyData(day_arr);
+                resolve({
+                    "success":"success",
+                });
+            },
+            error:function(xhr, status, error){
+                alert("fail! : " + xhr.status + " : " + xhr.statusText);
+                reject(xhr.status);
+            }
+        })
+    });
 }
 
 function readDayList(id, day)
 {
-    $.ajax({
-        url:"./ReadDay.php",
-        type:"GET",
-        data:{
-            current_id : id,
-            day : day
-        },
-
-        success:function(result){
-            day_arr = JSON.parse(result);
-            closeInfoBlock();
-            applyData(day_arr);
-        },
-        error:function(xhr, status, error){
-            alert("fail! : " + xhr.status + " : " + xhr.statusText);
-        }
-    })
+    return new Promise(function (resolve, reject){
+        $.ajax({
+            url:"./ReadDay.php",
+            type:"GET",
+            data:{
+                current_id : id,
+                day : day
+            },
+    
+            success:function(result){
+                day_arr = JSON.parse(result);
+                closeInfoBlock();
+                applyData(day_arr);
+                resolve({
+                    "success":"success",
+                });
+            },
+            error:function(xhr, status, error){
+                alert("fail! : " + xhr.status + " : " + xhr.statusText);
+                reject(xhr.status);
+            }
+        })
+    });
 }
 
 /**
@@ -351,55 +374,88 @@ $(function(){
     $(".draggable_ul").sortable({
         connectWith: ".draggable_ul",
         cursor: "pointer",
+        helper:'clone',
         
         update: function(event, ui){
             let past_day = $(ui.sender).attr("id");
+            let id = $("#login_success").val();
+            let currentNode = $(ui["item"]);
+            let day = currentNode.parents().attr("id");
+            
 
             if(past_day)
             {
-                let id = $("#login_success").val();
-                let currentNode = $(ui["item"]);
-                let day = currentNode.parents().attr("id");
                 let toDoID = currentNode.attr("id");
-                // let title = $("#" + toDoID).text();
-                // let desc = sessionStorage.getItem(toDoID);
-                
-                // deleteList(id, past_day, toDoID);
-                modify_DayList(id, day);
-                // addList(id, day, title, desc);
-
-                // addList(id, day, title, desc, toDoID);
-                // readDayList(id, day);
+                let desc = sessionStorage.getItem(toDoID);
+                dragOnDay(id, past_day, day, toDoID, desc);
             }
+            else
+                modify_DayList(id, day);
         },
     }).disableSelection();
 });
 
-function modify_DayList(id, day)
+function dragOnList(id, day)
 {
-    // remove all data
-    $.ajax({
-        url:"./RemoveAllDay.php",
-        type:"GET",
-        data:{
-            current_id : id,
-            day : day
-        },
+    modify_DayList(id, day);
+}
 
-        error:function(xhr, status, error){
-            alert("fail! : " + xhr.status + " : " + xhr.statusText);
-        }
-    })
+async function dragOnDay(id, past_day, day, toDoID, desc)
+{
+    let first = await deleteList(id, past_day, toDoID);
+    sessionStorage.setItem(toDoID, desc);
 
+    if(first["success"] === "success")
+    {
+        modify_DayList(id, past_day, day, toDoID);
+    }
+}
+
+async function modify_DayList(id, day)
+{
     let nodeList = $("#" + day).children();
 
-    for(let i = 0; i < nodeList.length; i++)
-    {
-        let toDoID = $(nodeList[i]).attr("id");
-        addList(id, day, $(nodeList[i]).text(), sessionStorage.getItem(toDoID), toDoID);
-    }
+    // remove all data
+    let first = await new Promise (function (resolve, reject){
+        $.ajax({
+            url:"./RemoveAllDay.php",
+            type:"GET",
+            data:{
+                current_id : id,
+                day : day
+            },
+            
+            success:function(){
+                resolve({
+                    "success":"success",
+                });
+            },
+        
+            error:function(xhr, status, error){
+                alert("fail! : " + xhr.status + " : " + xhr.statusText);
+                reject(xhr.status);
+            }
+        })
+    })
 
-    readDayList(id, day);
+    if(first["success"] === "success")
+    {
+        let second = await new Promise(function (resolve, reject){
+            for(let i = 0; i < nodeList.length; i++)
+            {
+                let toDoID = $(nodeList[i]).attr("id");
+                addList(id, day, $(nodeList[i]).text(), sessionStorage.getItem(toDoID), toDoID);
+                resolve({
+                    "success":"success",
+                });
+            }
+        })
+
+        if(second["success"] === "success")
+        {
+            let third = await readDayList(id, day);
+        }
+    }
 }
 
 

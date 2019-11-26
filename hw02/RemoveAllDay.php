@@ -5,4 +5,7 @@
     $id = htmlspecialchars($_GET['current_id']);
 
     $data_file = fopen($data_dir . $id . "_" . $day . ".txt", "w");
+    fwrite($data_file, "");
+    
+    echo "success";
 ?>
