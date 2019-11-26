@@ -1,3 +1,6 @@
+/**
+ * html의 입력받은 id와 pw 확인
+ */
 function dataCheck()
 {
     var id = document.getElementById("id").value;
@@ -11,6 +14,10 @@ function dataCheck()
     return true;
 }
 
+/**
+ * 입력받은 ID가 조건을 만족하는지 확인
+ * @param {id} str 
+ */
 function checkId(str)
 {
     let textType = /[a-zA-Z0-9]/;
@@ -33,6 +40,10 @@ function checkId(str)
     return true;
 }
 
+/**
+ * 패스워드가 조건을 만족시키는지 확인
+ * @param {pw} str 
+ */
 function checkPwd(str)
 {
     if(!checkNull(str)) 
@@ -43,6 +54,10 @@ function checkPwd(str)
     return true;
 }
 
+/**
+ * 빈칸여부 확인
+ * @param {data}} str 
+ */
 function checkNull(str)
 {
     if(($.trim(str) == "") || str == null)

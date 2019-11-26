@@ -1,3 +1,6 @@
+/**
+ * Channel page에 message 추가
+ */
 function addmessage()
 {
   new Ajax.Updater( 'chat', 'add.php',
@@ -10,7 +13,9 @@ function addmessage()
   } );
 }
 
-
+/**
+ * Channel page에서 message 가져오기
+ */
 function getMessages()
 {
   new Ajax.Updater( 'chat', 'messages.php', {
@@ -18,3 +23,12 @@ function getMessages()
   } );
 }
 getMessages();
+
+/**
+ * Main Page로 이동
+ */
+function goMainPage()
+{
+  return;
+}
+

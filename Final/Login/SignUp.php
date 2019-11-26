@@ -1,4 +1,7 @@
 <?php
+    /**
+     * mysql을 이용하여 DB에 회원가입 정보를 저장한다
+     */
     $host = 'localhost';
     $user = 'root';
     $pw = '201402377';
