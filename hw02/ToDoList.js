@@ -210,7 +210,7 @@ async function clickSubmit()
     alert("변경되었습니다.");
 
     let first = await deleteList(id, past_day, toDoID);
-    console.log(first["success"]);
+
     if(first["success"]==="success"){
         let second = await addList(id, day, title, desc, toDoID);
 
@@ -371,27 +371,34 @@ function applyData(arr)
  * drag & drop
  */
 $(function(){
+    let past_day;
+    let day;
+
     $(".draggable_ul").sortable({
         connectWith: ".draggable_ul",
         cursor: "pointer",
         helper:'clone',
         
-        update: function(event, ui){
-            let past_day = $(ui.sender).attr("id");
+        start: function(event, ui){
+            past_day = $(ui.item).parents().attr("id");
+        },
+
+        stop: function(event, ui){
             let id = $("#login_success").val();
             let currentNode = $(ui["item"]);
-            let day = currentNode.parents().attr("id");
-            
+            day = currentNode.parents().attr("id");
 
-            if(past_day)
+            if(past_day === day)
+            {
+                dragOnList(id, day);
+            }
+            else
             {
                 let toDoID = currentNode.attr("id");
                 let desc = sessionStorage.getItem(toDoID);
                 dragOnDay(id, past_day, day, toDoID, desc);
             }
-            else
-                modify_DayList(id, day);
-        },
+        }
     }).disableSelection();
 });
 
@@ -406,9 +413,7 @@ async function dragOnDay(id, past_day, day, toDoID, desc)
     sessionStorage.setItem(toDoID, desc);
 
     if(first["success"] === "success")
-    {
-        modify_DayList(id, past_day, day, toDoID);
-    }
+        await modify_DayList(id, day);
 }
 
 async function modify_DayList(id, day)
@@ -416,7 +421,31 @@ async function modify_DayList(id, day)
     let nodeList = $("#" + day).children();
 
     // remove all data
-    let first = await new Promise (function (resolve, reject){
+    let first = await clearDay(id, day);
+
+    if(first["success"]==="success"){
+        let secondFinish = new Promise(function(resolve, reject){
+            resolve({
+                "success":"not success",
+            });
+        });
+
+        for(let item of nodeList)
+        {
+            let toDoID = $(item).attr("id");
+            scondFinish = await addList(id, day, $(item).text(), sessionStorage.getItem(toDoID), toDoID);
+        }
+
+        if(secondFinish["success"] === "success")
+        {
+            let third = await readDayList(id, day);
+        }
+    }
+}
+
+function clearDay(id, day)
+{
+    return new Promise(function (resolve, reject){
         $.ajax({
             url:"./RemoveAllDay.php",
             type:"GET",
@@ -424,38 +453,18 @@ async function modify_DayList(id, day)
                 current_id : id,
                 day : day
             },
-            
             success:function(){
                 resolve({
                     "success":"success",
                 });
             },
-        
+
             error:function(xhr, status, error){
                 alert("fail! : " + xhr.status + " : " + xhr.statusText);
                 reject(xhr.status);
             }
         })
-    })
-
-    if(first["success"] === "success")
-    {
-        let second = await new Promise(function (resolve, reject){
-            for(let i = 0; i < nodeList.length; i++)
-            {
-                let toDoID = $(nodeList[i]).attr("id");
-                addList(id, day, $(nodeList[i]).text(), sessionStorage.getItem(toDoID), toDoID);
-                resolve({
-                    "success":"success",
-                });
-            }
-        })
-
-        if(second["success"] === "success")
-        {
-            let third = await readDayList(id, day);
-        }
-    }
+    });
 }
 
 
