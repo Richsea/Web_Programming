@@ -483,11 +483,6 @@ window.onload = function()
     }
 }
 
-$(window).resize(function(){
-    var windowWidth= $(window).width();
-})
-
-
 document.getElementById('Sun').addEventListener('click', showInfoBlock);
 document.getElementById('Mon').addEventListener('click', showInfoBlock);
 document.getElementById('Tue').addEventListener('click', showInfoBlock);

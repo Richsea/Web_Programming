@@ -10,16 +10,17 @@
 
 #login_Button
 {
-    float: right;
+    float: right !important;
+    position: relative;
 }
 
 #toDo_Info
 {
     float: left;
-    margin-top: 2%;
-    margin-left: 25%;
-    margin-right: 25%;
-    position: relative;
+    margin-top: 0.5%;
+    margin-left: 30%;
+    margin-right: 30%;
+    position: absolute;
 }
 
 .box_button
@@ -30,7 +31,7 @@
     margin-top: 10px;
 }
 
-#form_box
+.form_box
 {
     background-color: lightskyblue;
     border-style: outset;

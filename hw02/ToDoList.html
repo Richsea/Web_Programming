@@ -5,16 +5,16 @@
 	<meta charset="utf-8">
 	<title>HW02_201402377</title>
 	<link rel="stylesheet" type="text/css" href="ToDoList.css"/>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 	<div id="list_div">
 	<div id="add_Todo_Button">
 		<input type="button" class="block_area" value="Add" onclick="showToDoBlock()"/>
-		<span class="block_area" id="addList_Box">
+		<div class="block_area" id="addList_Box">
 			<form method="POST" onsubmit="return todoList_Info_Check()">
-			<table id="form_box">
+			<table class="form_box">
 				<tr>
 					<td>day</td>
 					<td><select name="day">
@@ -42,14 +42,13 @@
 			</table>
 			<input type="hidden" name="current_id"/>
 			</form>
-			
-		</span>
+		</div>
 	</div>
 
 	<div id="toDo_Info">
-		<span id="todoInfo_Box">
+		<div id="todoInfo_Box">
 			<form method="POST">
-			<table id="form_box">
+			<table class="form_box">
 				<tr>
 					<td>day</td>
 					<td><select name="info_day">
@@ -81,13 +80,13 @@
 			</table>
 			<input type="hidden" id="infoBoxId" value="">
 			</form>
-		</span>
+		</div>
 	</div>
 
 	<div id="login_Button">
-		<span class="block_area" id="login_Box">
+		<div class="block_area" id="login_Box">
 			<form method="POST" onsubmit="return login_Info_Check()">
-			<table id="form_box">
+			<table class="form_box">
 				<tr>
 					<td>id</td>
 					<td><input type="text" id="user_id" name="user_id"></td>
@@ -105,10 +104,10 @@
 				</tr>
 			</table>
 			</form>
-		</span>
-		<span class="block_area">
+		</div>
+		<div class="block_area">
 			<form method="POST"><span id="login_name"></span><input type="hidden" id="login_success" name="login_success" value="none"></form>
-		</span>
+		</div>
 		<span class="block_area">
 			<input type="button" value="Join" onclick="showLoginBlock()"/>
 			<input type="button" value="Logout" onclick="logOut()"/>
