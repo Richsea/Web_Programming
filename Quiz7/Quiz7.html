@@ -10,11 +10,11 @@
     
     <div>
         <canvas id="draw" width="400" height="400" style="border:1px solid black"></canvas>
-        <video id="video1" width="200" height="200" autoplay loop>
-          <source src="./video.mp4" type="video/mp4">
+        <video id="video1" width="200" height="200" style="visibility:hidden" autoplay muted loop>
+            <source src="./video.mp4" type="video/mp4">
         </video>
     </div>
-    <button>Try it</button>
+    <input type="button" value="Try it" onclick="rotate()"></button>
     <script src="Quiz7.js"></script>
 </body>
 </html>
