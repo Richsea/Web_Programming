@@ -11,6 +11,9 @@ window.onload = function()
  */
 function doFingerSnap()
 {
+    /*
+    important로 처리가 되어있는 채팅리스트는 삭제하지 않느다.
+    */
     return;
 }
 
@@ -33,7 +36,9 @@ function getStones()
  */
 function addChannel()
 {
-
+    /*
+    db에 채팅 리스트 추가 후 chat.js로 이동
+    */
 }
 
 /**
