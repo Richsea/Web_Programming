@@ -12,7 +12,7 @@
         if($filename == "" && $word == "")
         {
             echo "Enter the keywords of list that you want to search.";
-        break;
+            break;
         }
 
         if($filename == "")
@@ -33,27 +33,37 @@
         if($word == "")
         {
             echo "<ul>";
+            $keys = array_keys($infoArray);
 
-            if(array_key_exists($filename, $infoArray))
-                echo "<li>" . $filename . " : " . $infoArray[$filename] . "</li>";
+            for($i = 0; $i < count($keys); $i++)
+            {
+                if(strpos($keys[$i], $filename) !== false)
+                {
+                    echo "<li>" . $keys[$i] . " : " . $infoArray[$keys[$i]] . "</li>";
+                }
+            }
             
             echo "</ul>";
             break;
         }
+        
 
         echo "<ul>";
+        $keys = array_keys($infoArray);
 
-        if(array_key_exists($filename, $infoArray))
+        for($i=0; $i < count($keys); $i++)
         {
-            if(strpos($infoArray[$filename], $word))
-                echo "<li>" . $filename . " : " . $infoArray[$filename] . "</li>";
+            if(strpos($keys[$i], $filename) !== false)
+            {
+                if(strpos($infoArray[$keys[$i]], $word))
+                  echo "<li>" . $keys[$i] . " : " . $infoArray[$keys[$i]] . "</li>";
+            }
         }
 
         echo "</ul>";
         break;
     }
 
-    // 이 함수 진행 후 $infoArray=[[0][0]filename, [0][1]data] 형태로 저장됨
     function makeArrayFile()
     {
         global $infoArray, $data_file;
