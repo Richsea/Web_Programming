@@ -9,123 +9,150 @@
   <body>
     <h1>HTML5 소개 페이지</h1>
 
-    <div>
-    <h2>1. HTML5 개요</h2>
-        <p>HTML5는 <i>W3C가 발표하는 HTML의 최신 버전</i>이다. 2014년 10월 28일 완전히 표준화되었다.</p>
-        <p>HTML5에서 유효성 검사를 위한 선언문은 간단하게 몇 자만 적으면 된다. 특별한 경우가 아닌 이상 대소문자를 딱히 구분하지 않는다. DOCTYPE 부분은 대문자로 적는 것이 좋다. <strong>HTML 문법을 사용할 때는 선언문을 반드시 적어야 한다.</strong> HTML5에서는 시맨틱 웹을 중요시하여 여러가지 태그를 새롭게 만들었다.</p>
-        <p class="note">Note : start 태그는 opening tag라고 부르며, end tag는 closing tag라고 부른다.</p>
-        <p class="note">Note : body 섹션 안에 정의된 내용만 브라우저에 보여진다.</p>
+    <div class="oneAndTwo">
+        <div class="one">
+            <h2>1. HTML5 개요</h2>
+            <div class="inline">
+                <img src="html.png" alt="html logo">
+                <p>HTML5는 <i>W3C가 발표하는 HTML의 최신 버전</i>이다. 2014년 10월 28일 완전히 표준화되었다.</p>
+                <p>HTML5에서 유효성 검사를 위한 선언문은 간단하게 몇 자만 적으면 된다. 특별한 경우가 아닌 이상 대소문자를 딱히 구분하지 않는다. DOCTYPE 부분은 대문자로 적는 것이 좋다. <strong>HTML 문법을 사용할 때는 선언문을 반드시 적어야 한다.</strong> HTML5에서는 시맨틱 웹을 중요시하여 여러가지 태그를 새롭게 만들었다.</p>
+                <p class="note">Note : start 태그는 opening tag라고 부르며, end tag는 closing tag라고 부른다.</p>
+                <p class="note">Note : body 섹션 안에 정의된 내용만 브라우저에 보여진다.</p>
+            </div>
+        </div>
+          
+    <div class="two">
+        <h2 >2. 좋아하는 페이지 링크</h2>
+        <div>
+          <a href="https://www.w3.org/html" target="_blank">W3C HTML 페이지</a>
+          <br>
+          <a href="http://www.w3schools.com" target="_self">W3Schools 페이지</a>
+        </div>
+    </div>
     </div>
 
-    <div>
-    <h2>2. 좋아하는 페이지 링크</h2>
-      <a href="https://www.w3.org/html" target="_blank">W3C HTML 페이지</a>
-      <br>
-      <a href="http://www.w3schools.com" target="_self">W3Schools 페이지</a>
+    
+    <div class="threeAndFour">
+        <div class="three">
+            <h2>3. 시간표</h2>
+            <table>
+              <caption><span id="color_red">2019년 2학기 </span>시간표</caption>
+              <tr>
+                <th rowspan="2">교시</th>
+                <th colspan="5">요일</th>
+              </tr>
+              <tr>
+                <td>월</td>
+                <td>화</td>
+                <td>수</td>
+                <td>목</td>
+                <td>금</td>
+              </tr>
+              <tr>
+                <td>1교시</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>2교시</td>
+                <td></td>
+                <td rowspan="2">운영체제및실습</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>3교시</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>4교시</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>5교시</td>
+                <td rowspan="2">운영체제및실습</td>
+                <td></td>
+                <td rowspan="2">프로토스언어학개론</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>6교시</td>
+                <td rowspan="2">데이터통신</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>7교시</td>
+                <td rowspan="3">실전코딩</td>
+                <td rowspan="2">웹프로그래밍</td>
+                <td rowspan="2">기초독일어</td>
+                <td rowspan="2">웹프로그래밍</td>
+              </tr>
+              <tr>
+                <td>8교시</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>9교시</td>
+                <td></td>
+                <td></td>
+                <td>데이터통신</td>
+                <td></td>
+              </tr>
+            </table>
+        </div>
+    
+        <div class="fourth">
+            <div class="fifth">
+                <h2>4. 이번주 해야 할 일</h2>
+                <ol>
+                    <li>1.예습
+                    <ul>
+                      <li>CSS란</li>
+                      <li>CSS의 사용</li>
+                      <li>선택자</li>
+                    </ul>
+                  </li>
+                  <li>2. 복습
+                    <ul>
+                      <li>Learn CSS</li>
+                      <li>The Box Model</li>
+                      <li>Colors</li>
+                    </ul>
+                  </li>
+                  </ol>
+            </div>
+            <div class="fifth">
+                <h2>5. 기말고사 일정 및 범위</h2>
+                <p><strong>웹프로그래밍 기말 시험</strong></p>
+                <p>12월 14일</p>
+                <p>HTML, CSS, JQuery, PHP, Ajax</p>
+                
+                <p><strong>통계학 기말 시험</strong></p>
+                <p>12월 11일</p>
+                <p>확률, 표본 추출과 표집 분포</p>
+
+                <p><strong>생활과 영어 기말 시험</strong></p>
+                <p>12월 12일</p>
+
+                <p>동명사, to 부정사, 듣기, 쓰기</p>
+              <!-- <iframe  src="http://plus.cnu.ac.kr/html/kr/"></iframe> -->
+            </div>
+
+        </div>
     </div>
-
-    <h2>3. 관련 그림</h2>
-    <img src="html.png" alt="html logo">
-
-    <h2>4. 시간표</h2>
-    <table>
-      <caption><span id="color_red">2019년 2학기 </span>시간표</caption>
-      <tr>
-        <th rowspan="2">교시</th>
-        <th colspan="5">요일</th>
-      </tr>
-      <tr>
-        <td>월</td>
-        <td>화</td>
-        <td>수</td>
-        <td>목</td>
-        <td>금</td>
-      </tr>
-      <tr>
-        <td>1교시</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>2교시</td>
-        <td></td>
-        <td rowspan="2">운영체제및실습</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>3교시</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>4교시</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>5교시</td>
-        <td rowspan="2">운영체제및실습</td>
-        <td></td>
-        <td rowspan="2">프로토스언어학개론</td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>6교시</td>
-        <td rowspan="2">데이터통신</td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>7교시</td>
-        <td rowspan="3">실전코딩</td>
-        <td rowspan="2">웹프로그래밍</td>
-        <td rowspan="2">기초독일어</td>
-        <td rowspan="2">웹프로그래밍</td>
-      </tr>
-      <tr>
-        <td>8교시</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>9교시</td>
-        <td></td>
-        <td></td>
-        <td>데이터통신</td>
-        <td></td>
-      </tr>
-    </table>
-
-    <h2>5. 이번주 해야 할 일</h2>
-    <ol>
-        <li>1.예습
-        <ul>
-          <li>CSS란</li>
-          <li>CSS의 사용</li>
-          <li>선택자</li>
-        </ul>
-      </li>
-      <li>2. 복습
-        <ul>
-          <li>Learn CSS</li>
-          <li>The Box Model</li>
-          <li>Colors</li>
-        </ul>
-      </li>
-      </ol>
-
-
-  <iframe src="http://plus.cnu.ac.kr/html/kr/"></iframe>
   <hr>
   <address id="color_blue">
     You can contact author at <a class="address_option" href="http://www.cnu.ac.kr/contact">www.cnu.ac.kr</a><br>
