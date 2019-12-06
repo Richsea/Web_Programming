@@ -1,0 +1,96 @@
+h1
+{
+  border: 10px;
+  border-style: outset;
+  border-color: blue;
+  color: white;
+  text-align: center;
+  background-color: blue;
+  padding: 20px;
+  margin-bottom: 100px;
+}
+
+h2
+{
+  margin-top: 100px;
+}
+
+p
+{
+  text-indent: 15px;
+}
+
+span
+{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.note
+{
+  background-color: yellow;
+  border-left-width: 10px;
+  border-left-style: solid;
+  border-left-color: gold;
+  padding: 15px;
+
+}
+
+img
+{
+  width: 320px;
+  height: 300px;
+}
+
+#color_red
+{
+  color: red;
+}
+
+#color_blue
+{
+  color: blue;
+}
+
+table
+{
+  border: 3px solid;
+  color: black;
+  margin-right: auto;
+  margin-left: auto;
+  border-collapse: collapse;
+}
+
+th, td
+{
+  padding: 15px;
+  border: 3px solid;
+}
+
+iframe
+{
+  height: 500px;
+  width: 1000px;
+}
+
+.address_option
+{
+  padding: 0px;
+  margin: 0px;
+}
+
+td[rowspan="3"]
+{
+  background-color: gold;
+}
+
+td[rowspan="2"]
+{
+  background-color: cyan;
+}
+
+/* tr:nth-child(n+3) > td:nth-child(n+2)[rowspan="1"]:not(:empty) */
+tr:nth-child(n+3) > td:nth-child(n+2):not([rowspan]):not(:empty)
+{
+  background-color: pink;
+}
