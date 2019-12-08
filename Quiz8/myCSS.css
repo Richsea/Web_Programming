@@ -15,18 +15,8 @@ h2
   margin-top: 100px;
 }
 
-.inline
-{
-  position: relative;
-
-}
-
-.inline > p:nth-child(3), .inline > p:nth-child(2) {
-  margin-left:100px;
-}
-
 img{
-  position: absolute;
+  float:left;
   top:0px;
   left:10px;
   width:72px;
