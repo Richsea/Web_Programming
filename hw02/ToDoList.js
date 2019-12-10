@@ -490,3 +490,8 @@ document.getElementById('Wed').addEventListener('click', showInfoBlock);
 document.getElementById('Thu').addEventListener('click', showInfoBlock);
 document.getElementById('Fri').addEventListener('click', showInfoBlock);
 document.getElementById('Sat').addEventListener('click', showInfoBlock);
+
+document.addEventListener('keydown', function(event){
+    if(event.keyCode === 13)
+        event.preventDefault();
+}, true);

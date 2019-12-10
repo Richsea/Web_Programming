@@ -5,7 +5,7 @@
     $host = 'localhost';
     $user = 'root';
     $pw = '201402377';
-    $dbName = 'college_info';
+    $dbName = 'chatting';
     $t_name = 'members';
 
     $connect = mysqli_connect($host, $user, $pw, $dbName);
@@ -29,6 +29,8 @@
     VALUES('" . $id . "', '" . $pw . "')";
 
     $isInsertOK = mysqli_query($connect, $insert);
+
+    mysqli_close($connect);
 
     if(!$isInsertOK)
         echo "<script>alert('이미 존재하는 id입니다.'); location.replace('./SignUp.html');</script>";
