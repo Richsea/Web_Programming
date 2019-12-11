@@ -1,0 +1,28 @@
+img
+{
+    width: 10%;
+    height: 10%;
+    position: relative;
+}
+
+#mind
+{
+    margin: 10px, 0px, 0px, 0px;
+}
+
+#power
+{
+    margin: 0px, 40%, 0px, 40%;
+}
+
+#soul
+{
+    
+}
+
+#
+<img src="img/powerstone.png" id="power">
+    <img src="img/realitystone.png" id="reality">
+    <img src="img/soulstone.png" id="soul">
+    <img src="img/spacestone.png" id="space">
+    <img src="img/timestone.png" id="time">
