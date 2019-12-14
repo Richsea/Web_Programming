@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" type="text/css" href="Final_3.css"/>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    <div id="title">
+        <input type="button" value="Register an item" id="register" disabled>
+        <input type="button" value="Create a cart" id="create_cart" disabled>
+        <input type="button" value="Start" id="start">
+        Timer: <span id="timer"></span>
+    </div>
+    <div id="box">
+        <form method="POST" onsubmit="return functions()">
+            <table class="form_box">
+                <tr>
+                    <td>image</td>
+                    <td><input type="file" id="file"></td>
+                </tr>
+                <tr>
+                    <td>name</td>
+                    <td><input type="text" id="name"></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="Submit" id="submit_button"></td>
+                    <td><input type="button" value="Cancel" id="cancel_button"></td>
+                </tr>
+            </table>
+        </form>
+
+    </div>
+    <div id="selectedItem">
+        <div>
+            
+        </div>
+    </div>
+    <div id="selectedCart">
+
+    </div>
+    
+    <script src="Final_3.js"></script>
+</body>
+</html>

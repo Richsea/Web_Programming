@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" type="text/css" href="Final_2.css"/>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    <h1>나만의 Pizza Recipe</h1>
+    <div>
+        피자이름 : <input type="text" autofocus>
+    </div>
+
+    <h3>도우 & 토핑 선택</h3>
+    도우:
+    <select name="dow">
+        <option value="none" selected>not selected</option>
+        <option value="thin">씬</option>
+        <option value="napoly">나폴리</option>
+        <option value="original">오리지널</option>
+        <option value="doubleCheese">더블치즈</option>
+    </select>
+    <br>
+    
+    <div>
+        메인토핑 : 
+        <input type="checkbox">케이준 새우살
+        <input type="checkbox">페퍼로니
+        <input type="checkbox">파인애플
+        <input type="checkbox">불고기
+    </div>
+    <div>
+        주문 일자/시간 선택: 
+        <input type="datetime-local">
+    </div>
+
+    <div>
+        수량:
+        <input type="number" min="1" max="5">
+    </div>
+
+    <input type="button" value="주문하기">
+
+    <h1>주문서 확인</h1>
+    <div>
+        <input type="radio" name="search" value="amount">수량으로 검색
+        <input type="radio" name="search" value="orderedDay">주문 일자 순으로 검색
+    </div>
+    <input type="button" value="검색하기">
+    
+    <!-- <script src=".js"></script> -->
+</body>
+</html>

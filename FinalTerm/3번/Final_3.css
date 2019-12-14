@@ -1,0 +1,19 @@
+.form_box
+{
+    background-color: lightskyblue;
+    border-style: outset;
+    border-color: skyblue;
+    border-width: 3px;
+    padding: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+}
+
+img
+{
+    width: 100px;
+    height: 100px;
+}
