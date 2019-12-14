@@ -9,7 +9,7 @@
 
     if(mysqli_connect_errno($connect))
     {
-        echo "failed connectino to DB: " . mysqli_connect_error();
+        echo "failed connectino to DB: " . mysqli_connect_error();    
     }
     else
     {
@@ -37,7 +37,9 @@
 
         if($dbPw[0] == $pw)
         {
-            echo "<script>location.replace('../Chatting/MainPage.html');</script>";
+            session_start();
+            $_SESSION['user_id'] = $id;
+            echo "<script>location.replace('../Chatting/MainPage.php');</script>";
         }
         else
         {

@@ -88,3 +88,16 @@ input[type="button"]:hover
 {
     background-color: lightgrey;
 }
+
+/*
+*  add_block box
+*/
+.form_box
+{
+    background-color: lightskyblue;
+    border-style: outset;
+    border-color: skyblue;
+    border-width: 3px;
+    padding: 10px;
+    display: none;
+}
