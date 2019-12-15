@@ -30,10 +30,23 @@
 
     $isInsertOK = mysqli_query($connect, $insert);
 
-    mysqli_close($connect);
-
     if(!$isInsertOK)
+    {
+        mysqli_close($connect);
         echo "<script>alert('이미 존재하는 id입니다.'); location.replace('./SignUp.html');</script>";
+    }
     else
+    {
+        $list_table = $id . "_CHATTINGLIST";
+        $create =
+        "CREATE TABLE " . $list_table . "(
+            room_name varchar(20) not null,
+            important TINYINT(1) DEFAULT 0,
+            PRIMARY KEY (room_name)
+        );";
+        mysqli_query($connect, $create);
+        mysqli_close($connect);
+
         echo "<script>location.replace('./Login.html');</script>";
+    }
 ?>

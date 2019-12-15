@@ -49,7 +49,15 @@ function addChannel()
         success:function(data)
         {
             close_Box();
-            // 생성된 채팅방으로 이동하는 과정 추가
+            data = JSON.parse(data);
+            if(data == "db exist")
+            {
+                alert("같은 이름으로 생성된 채팅방 존재");
+            }
+            else if(data == "success")
+            {
+                location.replace("./chat.php");
+            }
         },
         
         error:function(xhr, status, error)
@@ -110,3 +118,13 @@ function room_validation()
     }
     return true;
 }
+
+/**
+ * 엔터로 인한 잘못된 처리 방지
+ */
+document.addEventListener('keydown', function(event){
+    if(event.keyCode === 13)
+    {
+      event.preventDefault();
+    }
+}, true);

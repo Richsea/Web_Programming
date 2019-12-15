@@ -1,7 +1,7 @@
 <?php
     session_start();
     // $user = $_SESSION['user_id'];    // 나중에 완성 후 주석 해제 필요
-    $user = "test";
+    $user_id = "test";
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +56,7 @@
     <div id="add_box">
         <form method="POST">
         <table class="form_box">
-            <tr><td><input type="hidden" id="login_id" value="<?php echo($user) ?>"></td></tr>
+            <tr><td><input type="hidden" id="login_id" value="<?php echo($user_id) ?>"></td></tr>
             <tr>
                 <td>room name</td>
                 <td><input type="text" id="room_name"></td>
