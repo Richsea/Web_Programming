@@ -4,6 +4,19 @@
 window.onload = function()
 {
     // Main page를 장식할 6가지 image file과 channel 필요
+
+}
+
+function myChattingRoomList()
+{
+    $.ajax({
+        url: "myChattingList.php",
+        
+        success:function(result)
+        {
+            result = JSON.parse(result);
+        }
+    })
 }
 
 /**
