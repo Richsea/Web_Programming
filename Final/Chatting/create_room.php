@@ -41,7 +41,7 @@
         // 새로운 chatting방 이름 추가
         $insert = 
         "INSERT INTO CHATTINGLIST
-        VALUES('" . $r_name . "')";
+        VALUES('" . $r_name . "', 1)";
 
         mysqli_query($connect, $insert);
 
@@ -66,6 +66,8 @@
 
         unset($_SESSION['current_room']);
         $_SESSION['current_room'] = $r_name;
+
+        mysqli_close($connect);
         
         echo json_encode("success");
     }

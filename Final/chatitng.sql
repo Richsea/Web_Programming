@@ -9,6 +9,7 @@ CREATE TABLE MEMBERS(
 
 CREATE TABLE CHATTINGLIST(
     room_name varchar(20) not null,
+    member_num int(10),
     PRIMARY KEY (room_name)
 );
 
@@ -30,4 +31,10 @@ CREATE TABLE id_CHATTINGLIST(
 );
 */
 
--- INSERT INTO aa values(null, 'test', 'hi');
+/* 
+INSERT INTO aa values(null, 'test', 'hi');
+SELECT important FROM id_CHATTINGLIST WHERE room_name = 'r_name'
+UPDATE test_CHATTINGLIST SET important="1" WHERE room_name = "aa";
+DELETE FROM test_chattinglist WHERE room_name = 'aa';
+SELECT member_num FROM chattinglist WHERE member_num = 1 and room_name = 'aa';
+*/

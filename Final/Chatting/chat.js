@@ -3,11 +3,15 @@
  */
 function addMessage()
 {
-  console.log($('chatmessage'));
-  new Ajax.Updater('chat', 'add.php',
+  let text = document.getElementById("messagetext").value;
+  
+  new Ajax.Updater('chatBox', 'add.php',
   {
-    method: 'post',
-    parameters: $('chatmessage').serialize(),
+    method: 'get',
+    parameters:
+    {
+      data:text
+    },
     
     onSuccess: function()
     {
@@ -20,9 +24,14 @@ function addMessage()
  * Channel page에서 message 가져오기
  */
 function getMessages()
-{  
-  new Ajax.Updater( 'chat', 'messages.php', {
-    onSuccess: function() { window.setTimeout( getMessages, 1000 ); }
+{
+  new Ajax.Updater('chatBox', 'messages.php', 
+  {
+    onSuccess: function() 
+    { 
+      window.setTimeout( getMessages, 1000 );
+      return;
+    }
   });
 }
 
@@ -33,7 +42,33 @@ function getMessages()
  */
 function controlImportant()
 {
+  let isImportant = jQuery("#toggle_important").attr("class");
 
+  isImportant = controlButton(isImportant);
+
+  jQuery.ajax({
+    url:"changeImportant.php",
+    type: 'get',
+    data:
+    {
+      bool : isImportant  
+    }
+  });
+}
+
+function controlButton(number)
+{
+  if(number == 1)
+  {
+    jQuery("#toggle_important").attr("class", 0);
+    jQuery("#toggle_important").attr("value", "Important");
+    jQuery("#exit_chat").attr("disabled", false);
+    return 0;
+  }
+  jQuery("#toggle_important").attr("class", 1);
+  jQuery("#toggle_important").attr("value", "√ Important");
+  jQuery("#exit_chat").attr("disabled", true);
+  return 1;
 }
 
 /**
@@ -41,10 +76,34 @@ function controlImportant()
  */
 function exitChannel()
 {
-  /*
-  if(채팅방의 마지막인원) 채널 삭제
-  else 자기 자신만 채팅방에서 탈퇴
-  */
+  jQuery.ajax({
+    url:"important.php",
+
+    success:function(data)
+    {
+      data = JSON.parse(data)[0];
+
+      if(data == 0)
+      {
+        removeChannelList();
+        goMainPage();
+      }
+      else
+      {
+        alert("채널을 나갈 수 없습니다.");
+        return;
+      }
+    }
+  });
+
+  return goMainPage();
+}
+
+function removeChannelList()
+{
+  jQuery.ajax({
+    url:"removeChatting.php",
+  });
 }
 
 /**
@@ -52,10 +111,12 @@ function exitChannel()
  */
 function goMainPage()
 {
-
-  return;
+  return location.replace('./MainPage.php');
 }
 
+/**
+ * 버튼 event 처리
+ */
 $("#add_chat").click(function()
 {
   addMessage();
@@ -76,8 +137,24 @@ $('#toggle_important').click(function()
   controlImportant();
 });
 
+/**
+ * initial 상태
+ */
 window.onload = function()
 {
+  jQuery.ajax({
+    url:"important.php",
+
+    success:function(data)
+    {
+      data = JSON.parse(data)[0];
+      jQuery("#toggle_important").attr("class", data);
+
+      if(data == 1) { controlButton(0) }
+      else { controlButton(1) }
+    }
+  });
+
   this.getMessages();
 }
 
@@ -90,3 +167,4 @@ document.addEventListener('keydown', function(event){
     event.preventDefault();
   }
 }, true);
+

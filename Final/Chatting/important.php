@@ -1,6 +1,5 @@
 <?php
     session_start();
-
     $user_id = $_SESSION['user_id'];
     $r_name = $_SESSION['current_room'];
     
@@ -16,26 +15,14 @@
         echo "failed connection to DB: " . mysqli_connect_error();
         return;
     }
+
     mysqli_select_db($connect, $dbName) or die('DB failed');
 
-    $sql = "INSERT INTO " . $r_name . " VALUES ( null, '" . $user_id . "', '" . $_GET['data'] . "')";
+    $tbName = $user_id . "_CHATTINGLIST";
+    $sql = "SELECT important FROM " . $tbName . " WHERE room_name = '" . $r_name . "'";
 
     $result = mysqli_query($connect, $sql);
-?>
-<table>
-<?php
-    $sql = "SELECT * FROM " . $r_name;
-    $result = mysqli_query($connect, $sql);
-
-    while($row = mysqli_fetch_array($result))
-    {
-?>
-        <tr>
-            <td><?php echo $row[1] . ": " ?></td>
-            <td><?php echo $row[2] ?></td>
-        </tr>
-<?php
-    }
     mysqli_close($connect);
+
+    echo json_encode(mysqli_fetch_row($result));
 ?>
-</table>

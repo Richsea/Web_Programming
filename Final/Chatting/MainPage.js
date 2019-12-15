@@ -97,6 +97,9 @@ $("#create_channel").click(function(){
     $(".form_box").css("display", "block");
 });
 
+$("#show_chattingList").click(function(){
+
+});
 
 /**
  * add box control
@@ -141,3 +144,4 @@ document.addEventListener('keydown', function(event){
       event.preventDefault();
     }
 }, true);
+

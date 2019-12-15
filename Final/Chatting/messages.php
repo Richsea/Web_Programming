@@ -2,10 +2,8 @@
 <?php
     session_start();
 
-    // $user_id = $_SESSION['user_id'];
-    // $r_name = $_SESSION['current_room'];
-    $user_id = "test";
-    $r_name = "aa";
+    $user_id = $_SESSION['user_id'];
+    $r_name = $_SESSION['current_room'];
     
     $host = 'localhost';
     $user = 'root';
@@ -34,5 +32,6 @@
         </tr>
 <?php
     }
+    mysqli_close($connect);
 ?>
 </table>
