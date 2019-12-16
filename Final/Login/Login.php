@@ -40,7 +40,7 @@
             session_start();
             unset($_SESSION['user_id']);
             $_SESSION['user_id'] = $id;
-            echo "<script>location.replace('../Chatting/MainPage.php');</script>";
+            echo "<script>location.replace('../Chatting/MainPage.html');</script>";
         }
         else
         {

@@ -35,7 +35,9 @@
     }
 
     $sql = "INSERT INTO " . $myChattingList . " VALUES('" . $r_name . "', 0)";
-    
+    $result = mysqli_query($connect, $sql);
+
+    $sql = "UPDATE CHATTINGLIST SET member_num = member_num + 1 WHERE room_name = '" . $r_name . "'";
     $result = mysqli_query($connect, $sql);
 
     unset($_SESSION['current_room']);

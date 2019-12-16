@@ -24,7 +24,7 @@
 
     if(mysqli_num_rows($result) <= 0)
     {
-        echo "<script>alert('no chatting room exist'); location.replace('./MainPage.php');</script>";
+        echo "<script>alert('no chatting room exist'); location.replace('./MainPage.html');</script>";
         return;
     }
 

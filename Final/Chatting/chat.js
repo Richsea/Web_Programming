@@ -111,7 +111,7 @@ function removeChannelList()
  */
 function goMainPage()
 {
-  return location.replace('./MainPage.php');
+  return location.replace('./MainPage.html');
 }
 
 /**

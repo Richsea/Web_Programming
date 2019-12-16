@@ -25,6 +25,12 @@ img:hover
     border-color: lightgrey;
 }
 
+#menu
+{
+    width: 4%;
+    height: auto;
+}
+
 #first, #second, #third
 {
     position: relative;
@@ -74,14 +80,22 @@ img:hover
 /*
 * channelList css
 */
-#channelList_Div
-{
-    margin-left: auto;
-    margin-right: auto;
-}
 #channelList_Div div
 {
-    background-color: magenta;
+    background-color: pink;
+    display: none;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    border-style: outset;
+    border-color: lightgrey;
+    text-align: center;
+    width: 20%;
+}
+#channelList_Div div:hover
+{
+    background-color: #ff30ff;
 }
 
 /*

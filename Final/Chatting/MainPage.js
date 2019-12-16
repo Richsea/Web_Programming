@@ -3,15 +3,9 @@
  */
 window.onload = function()
 {
-    // Main page를 장식할 6가지 image file과 channel 필요
     if(sessionStorage.length == 0)
     {
-        sessionStorage.setItem('power', 0);
-        sessionStorage.setItem('space', 0);
-        sessionStorage.setItem('mind', 0);
-        sessionStorage.setItem('reality', 0);
-        sessionStorage.setItem('soul', 0);
-        sessionStorage.setItem('time', 0);
+        this.initStones();
     }
     else
     {
@@ -34,8 +28,29 @@ function myChattingRoomList()
         success:function(result)
         {
             result = JSON.parse(result);
+            displayRoomList(result);
         }
     })
+}
+
+function displayRoomList(list)
+{
+    for(let i=0; i < list.length; i++)
+    {
+        let room_name = list[i];
+        let newNode = $("<div id='" + room_name + "' class='chattingList'>" + room_name + "</div>");
+        $("#channelList_Div").append(newNode);
+    }
+}
+
+function initStones()
+{
+    sessionStorage.setItem('power', 0);
+    sessionStorage.setItem('space', 0);
+    sessionStorage.setItem('mind', 0);
+    sessionStorage.setItem('reality', 0);
+    sessionStorage.setItem('soul', 0);
+    sessionStorage.setItem('time', 0);
 }
 
 /**
@@ -48,13 +63,10 @@ function doFingerSnap()
 
         success:function()
         {
-            location.replace("./MainPage.php");
+            initStones();
+            location.replace("./MainPage.html");
         }
     });
-    console.log("hi");
-
-    
-    return;
 }
 
 /**
@@ -168,6 +180,42 @@ $("#show_chattingList").click(function(){
     location.replace('./TotalChattingList.php');
 });
 
+$("#menu").click(function(){
+    let state = $("#menu").attr("class");
+
+    if(state === "menu")
+    {
+        $("#menu").attr("src", "img/menu_clicked.png");
+        $("#menu").attr("class", "selected");
+        $("#channelList_Div div").show();
+    }
+    else
+    {
+        $("#menu").attr("src", "img/menu.png");
+        $("#menu").attr("class", "menu");
+        $("#channelList_Div div").hide();
+    }
+});
+
+$("#channelList_Div").click(function(ev){
+    let eventNode = $(ev.target);
+    let className = eventNode.attr('class');
+    if(className === "chattingList")
+    {
+        let chattingId = eventNode.attr('id');
+
+        $.ajax({
+            url:"./UpdateSession.php",
+            data: { r_name: chattingId },
+
+            success:function()
+            {
+                location.replace("./chat.php");
+            }
+        });
+    }
+})
+
 /**
  * add box control
  */
@@ -176,7 +224,6 @@ $("#cancel").click(function(){
 });
 
 $("#add").click(function(){
-    // box에서 add 선택
     if(!room_validation())
         return;
     

@@ -43,7 +43,7 @@
         // user 개개인의 DB chattingList에 chatting room 추가
         $user_chattingList = $user_id . "_CHATTINGLIST";
         $insert = 
-        "INSERT INTO " . $user_chattingList . "(room_name)
+        "INSERT INTO " . $user_chattingList . " (room_name)
         VALUES('" . $r_name . "')";
 
         mysqli_query($connect, $insert);
