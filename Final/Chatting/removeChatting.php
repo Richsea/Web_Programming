@@ -31,12 +31,13 @@
         $sql = "DELETE FROM CHATTINGLIST WHERE room_name = '" . $r_name . "'";
         mysqli_query($connect, $sql);
         $sql = "DROP TABLE " . $r_name;
+        mysqli_query($connect, $sql);
     }
     else
     {
         $sql = "UPDATE CHATTINGLIST SET member_num = member_num - 1 WHERE room_name = '". $r_name . "'";
+        mysqli_query($connect, $sql);
     }
-    $result = mysqli_query($connect, $sql);
 
     mysqli_close($connect);
 ?>

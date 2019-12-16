@@ -4,7 +4,26 @@
 window.onload = function()
 {
     // Main page를 장식할 6가지 image file과 channel 필요
+    if(sessionStorage.length == 0)
+    {
+        sessionStorage.setItem('power', 0);
+        sessionStorage.setItem('space', 0);
+        sessionStorage.setItem('mind', 0);
+        sessionStorage.setItem('reality', 0);
+        sessionStorage.setItem('soul', 0);
+        sessionStorage.setItem('time', 0);
+    }
+    else
+    {
+        this.imgColorChange('power', sessionStorage.getItem('power'));
+        this.imgColorChange('space', sessionStorage.getItem('space'));
+        this.imgColorChange('mind', sessionStorage.getItem('mind'));
+        this.imgColorChange('reality', sessionStorage.getItem('reality'));
+        this.imgColorChange('soul', sessionStorage.getItem('soul'));
+        this.imgColorChange('time', sessionStorage.getItem('time'));
+    }
 
+    this.myChattingRoomList();
 }
 
 function myChattingRoomList()
@@ -24,24 +43,73 @@ function myChattingRoomList()
  */
 function doFingerSnap()
 {
-    /*
-    important로 처리가 되어있는 채팅리스트는 삭제하지 않느다.
-    */
+    $.ajax({
+        url: "./FingerSnap.php",
+
+        success:function()
+        {
+            location.replace("./MainPage.php");
+        }
+    });
+    console.log("hi");
+
+    
     return;
 }
 
 /**
  * image가 click 되었을 때의 동작방식 설정
  */
-function getStones()
+function getStones(id)
 {
-    /*
-    if(image가 클리되어 있는 상태)
-        return;
+    if(sessionStorage.getItem(id) == 0)
+    {
+        imgColorChange(id, 1);
+    }
     else
-        image click 실행 
-    */
-    return;
+    {
+        imgColorChange(id, 0);
+    }
+}
+
+function imgColorChange(key, value)
+{
+    let nodeID = "#" + key;
+
+    if(value == 1)
+    {
+        $(nodeID)
+            .css("-webkit-filter", "grayscale(1)")
+            .css("-webkit-filter", "grayscale(100%)");
+        sessionStorage.setItem(key, 1);
+    }
+    else
+    {
+        $(nodeID)
+            .css("-webkit-filter", "grayscale(0)");
+        sessionStorage.setItem(key, 0);
+    }
+}
+
+function checkClickedImage()
+{
+    let stoneList = ["power", "mind", "reality", "soul", "space", "time"];
+    let hasAllStone = 1;
+
+    stoneList.forEach(function(key){
+        let hasStone = sessionStorage.getItem(key);
+        
+        if(hasStone == 0)
+        {
+            hasAllStone = 0;
+            return;
+        }
+    });
+
+    if(hasAllStone == 1)
+    {
+        doFingerSnap();
+    }
 }
 
 /**
@@ -85,20 +153,19 @@ function addChannel()
  * 각 image의 click시 event를 나타내기 위한 eventListener
  */
 
-// document.getElementById('space').addEventListener('click', getStones);
-// document.getElementById('power').addEventListener('click', getStones);
-// document.getElementById('time').addEventListener('click', getStones);
-// document.getElementById('soul').addEventListener('click', getStones);
-// document.getElementById('reality').addEventListener('click', getStones);
-// document.getElementById('mind').addEventListener('click', getStones);
+$(".back_img").click(function(ev){
+    let event_id = $(ev.target).attr("id");
+    getStones(event_id);
 
+    checkClickedImage();
+});
 
 $("#create_channel").click(function(){
     $(".form_box").css("display", "block");
 });
 
 $("#show_chattingList").click(function(){
-
+    location.replace('./TotalChattingList.php');
 });
 
 /**
@@ -144,4 +211,3 @@ document.addEventListener('keydown', function(event){
       event.preventDefault();
     }
 }, true);
-

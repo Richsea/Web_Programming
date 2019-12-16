@@ -20,7 +20,11 @@
     }
     mysqli_select_db($connect, $r_name);
 
+
+
     /**
      * id_chattingList의 데이터를 가져와서 div로 node를 만들어서 표현
      */
+
+    mysqli_close($connect);
 ?>

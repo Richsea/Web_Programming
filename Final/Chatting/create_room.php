@@ -1,7 +1,6 @@
 <?php
     session_start();
-    // $user = $_SESSION['user_id'];    // 나중에 완성 후 주석 해제 필요
-    $user_id = "test";
+    $user_id = $_SESSION['user_id'];
     
     $host = 'localhost';
     $user = 'root';
@@ -25,16 +24,12 @@
 
     if($result)
     {
-        $db_list = mysqli_fetch_row($result);
-        if(!empty($db_list))
+        while($db_list = mysqli_fetch_row($result))
         {
-            for($i = 0; $i < count($db_list); $i++)
+            if($db_list[0] == $r_name)
             {
-                if($db_list[$i] === $r_name)
-                {
-                    echo json_encode("db exist");
-                    return;
-                }
+                echo json_encode("db exist");
+                return;
             }
         }
 

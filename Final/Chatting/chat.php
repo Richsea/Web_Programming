@@ -1,6 +1,5 @@
 <?php
-    session_start();    // session 초기화
-
+    session_start();    // session 초기
     $current_room = $_SESSION['current_room'];
 ?>
 

@@ -1,7 +1,5 @@
 <?php
-    session_start();
-    // $user = $_SESSION['user_id'];    // 나중에 완성 후 주석 해제 필요
-    $user_id = "test";
+
 ?>
 
 <!DOCTYPE html>
@@ -17,33 +15,33 @@
         <div id="first">
             <div class="background_column"></div>
             <div class="background_column">
-                <img src="img/powerstone.png" id="power">
+                <img src="img/powerstone.png" id="power" class="back_img">
             </div>
             <div class="background_column"></div>
             <div class="background_column">
-                <img src="img/mindstone.png" id="mind">
+                <img src="img/mindstone.png" id="mind" class="back_img">
             </div>
             <div class="background_column"></div>
         </div>
         <div id="second">
             <div class="background_column">
-                <img src="img/realitystone.png" id="reality">
+                <img src="img/realitystone.png" id="reality" class="back_img">
             </div>
             <div class="background_column"></div>
             <div class="background_column"></div>
             <div class="background_column"></div>
             <div class="background_column">
-                <img src="img/soulstone.png" id="soul">
+                <img src="img/soulstone.png" id="soul" class="back_img">
             </div>
         </div>
         <div id="third">
             <div class="background_column"></div>
             <div class="background_column">
-                <img src="img/spacestone.png" id="space">
+                <img src="img/spacestone.png" id="space" class="back_img">
             </div>
             <div class="background_column"></div>
             <div class="background_column">
-                <img src="img/timestone.png" id="time">
+                <img src="img/timestone.png" id="time" class="back_img">
             </div>
             <div class="background_column"></div>
         </div>
@@ -56,7 +54,6 @@
     <div id="add_box">
         <form method="POST">
         <table class="form_box">
-            <tr><td><input type="hidden" id="login_id" value="<?php echo($user_id) ?>"></td></tr>
             <tr>
                 <td>room name</td>
                 <td><input type="text" id="room_name"></td>
@@ -71,7 +68,7 @@
 
     <div id="button_Div">
         <input type="button" value="new chatting channel" id="create_channel">
-        <input type="button" value="search channel">
+        <input type="button" value="search channel" id="show_chattingList">
     </div>
 
     <script src="MainPage.js"></script>
