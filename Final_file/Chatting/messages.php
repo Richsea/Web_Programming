@@ -8,23 +8,23 @@
 
     $chat_file = fopen($data_dir . $r_name . ".txt", "a+");
 
-    $data;
+    $data = array();
     while(!feof($chat_file))
     {
         $list = fgets($chat_file);
+        $list = str_replace("\r\n", "", $list);
 
         if(strlen($list) == 0) continue;
 
-        $data = explode("\r", $list);
+        $data[] = explode("|", $list);
     }
 
-    for($i=0; $i < count($data)-1; $i++)
+    for($i=0; $i < count($data); $i++)
     {
-        $row = explode("|", $data[$i]);
 ?>
         <tr>
-            <td><?php echo $row[0] . ": " ?></td>
-            <td><?php echo $row[1] ?></td>
+            <td><?php echo $data[$i][0] . ": " ?></td>
+            <td><?php echo $data[$i][1] ?></td>
         </tr>
 <?php
     }

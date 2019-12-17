@@ -4,41 +4,67 @@
     $user_id = $_SESSION['user_id'];
     $r_name = $_SESSION['current_room'];
 
-    $host = 'localhost';
-    $user = 'root';
-    $pw = '201402377';
-    $dbName = 'chatting';
+    $myChattingList = $user_id . "_chattinglist";
+    $list_file = fopen($data_dir . "chattinglist.txt", "r");
+    $user_list = fopen($data_dir . $myChattingList . ".txt", "r");
 
-    $connect = mysqli_connect($host, $user, $pw, $dbName);
+    // delete from userList
+    $myList = read_File($user_list);
 
-    if(mysqli_connect_errno($connect))
+    $user_list = fopen($data_dir . $myChattingList . ".txt", "w");
+    $user_list = fopen($data_dir . $myChattingList . ".txt", "a+");
+    
+    for($i=0; $i < count($myList); $i++)
     {
-        echo "failed connection to DB: " . mysqli_connect_error();
-        return;
+        if($myList[$i][0] == $r_name)
+        {
+            continue;
+        }
+        else
+        {
+            fwrite($user_list, $myList[$i][0] . "|" . $myList[$i][1] . "\r\n");
+        }
     }
 
-    mysqli_select_db($connect, $dbName) or die('DB failed');
+    // delete from chattinglist
+    $chatList = read_File($list_file);
 
-    $tbName = $user_id . "_CHATTINGLIST";
-    $sql = "DELETE FROM " . $tbName . " WHERE room_name = '" . $r_name . "'";
-    $result = mysqli_query($connect, $sql);
+    $list_file = fopen($data_dir . "chattinglist.txt", "w");
+    $list_file = fopen($data_dir . "chattinglist.txt", "a+");
 
-    $sql = "SELECT member_num FROM CHATTINGLIST WHERE member_num = 1 and room_name = '" . $r_name . "'";
-    $result = mysqli_query($connect, $sql);
-    $result = mysqli_fetch_row($result);
-
-    if($result[0] == 1)
+    for($i=0; $i < count($chatList); $i++)
     {
-        $sql = "DELETE FROM CHATTINGLIST WHERE room_name = '" . $r_name . "'";
-        mysqli_query($connect, $sql);
-        $sql = "DROP TABLE " . $r_name;
-        mysqli_query($connect, $sql);
-    }
-    else
-    {
-        $sql = "UPDATE CHATTINGLIST SET member_num = member_num - 1 WHERE room_name = '". $r_name . "'";
-        mysqli_query($connect, $sql);
+        if($chatList[$i][0] == $r_name)
+        {
+            $newNum = $chatList[$i][1] - 1;
+            if($newNum < 1)
+            {
+                continue;
+            }
+            else
+            {
+                $input = $chatList[$i][0] . "|" . $newNum . "\r\n";
+                fwrite($list_file, $input);
+            }
+            continue;
+        }
+        $input = $chatList[$i][0] . "|" . $chatList[$i][1] . "\r\n";
+        fwrite($list_file, $input);
     }
 
-    mysqli_close($connect);
+    function read_File($f_name)
+    {
+        $data = array();
+        while(!feof($f_name))
+        {
+            $list = fgets($f_name);
+            $list = str_replace("\r\n", "", $list);
+
+            if(strlen($list) == 0) continue;
+
+            $data[] = explode("|", $list);
+        }
+
+        return $data;
+    }
 ?>
