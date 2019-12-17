@@ -64,3 +64,8 @@ function checkNull(str)
         return false;
     return true;
 }
+
+function goSignUp()
+{
+    location.replace("./SignUp.html");
+}
