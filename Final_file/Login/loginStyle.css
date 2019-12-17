@@ -1,0 +1,22 @@
+@charset "EUC-KR";
+
+div
+{
+	display: flex;
+	width: 200px;
+}
+	
+.title
+{
+	width: 75px;
+}
+		
+.input
+{
+	width: 125px;
+}
+		
+.button
+{
+	width: 80px;
+}

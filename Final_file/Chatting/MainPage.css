@@ -1,0 +1,128 @@
+/*
+* background image css
+*/
+#background_Div
+{
+    position: fixed;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+img
+{
+    width: 50%;
+    height: auto;
+    position: relative;
+}
+
+img:hover
+{
+    border-style: outset;
+    border-color: lightgrey;
+}
+
+#menu
+{
+    width: 4%;
+    height: auto;
+}
+
+#first, #second, #third
+{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    margin-top: 2%;
+    z-index: -2;
+}
+
+.background_column
+{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+}
+
+#mind
+{
+    background-image: url('img/mindstone.png');
+}
+#power
+{
+    background-image: url('img/powerstone.png');
+}
+#reality
+{
+    background-image: url('img/realitystone.png');
+}
+#soul
+{
+    background-image: url('img/soulstone.png');
+}
+#space
+{
+    background-image: url('img/spacestone.png');
+}
+#time
+{
+    background-image: url('img/timestone.png');
+}
+
+/*
+* channelList css
+*/
+#channelList_Div div
+{
+    background-color: pink;
+    display: none;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    border-style: outset;
+    border-color: lightgrey;
+    text-align: center;
+    width: 20%;
+}
+#channelList_Div div:hover
+{
+    background-color: #ff30ff;
+}
+
+/*
+* button css
+*/
+#button_Div
+{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    margin-bottom: 2%;
+}
+
+input[type="button"]:hover
+{
+    background-color: lightgrey;
+}
+
+/*
+*  add_block box
+*/
+.form_box
+{
+    background-color: lightskyblue;
+    border-style: outset;
+    border-color: skyblue;
+    border-width: 3px;
+    padding: 10px;
+    display: none;
+}

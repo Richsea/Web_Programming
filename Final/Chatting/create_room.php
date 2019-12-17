@@ -36,7 +36,7 @@
         // 새로운 chatting방 이름 추가
         $insert = 
         "INSERT INTO CHATTINGLIST
-        VALUES('" . $r_name . "', 1)";
+         VALUES('" . $r_name . "', 1)";
 
         mysqli_query($connect, $insert);
 
