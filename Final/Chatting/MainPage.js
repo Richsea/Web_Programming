@@ -197,6 +197,7 @@ $("#menu").click(function(){
     }
 });
 
+// problem 문제 발생. update에서 무조건 +1 하는 문제
 $("#channelList_Div").click(function(ev){
     let eventNode = $(ev.target);
     let className = eventNode.attr('class');

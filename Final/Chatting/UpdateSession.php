@@ -21,7 +21,6 @@
 
     mysqli_select_db($connect, $dbName) or die('DB failed');
 
-    $sql = "UPDATE CHATTINGLIST SET member_num = member_num + 1 WHERE room_name = '" . $r_name . "'";
     $result = mysqli_query($connect, $sql);
 
     mysqli_close($connect);

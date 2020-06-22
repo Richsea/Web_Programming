@@ -22,7 +22,7 @@
     $sql = "DELETE FROM " . $tbName . " WHERE room_name = '" . $r_name . "'";
     $result = mysqli_query($connect, $sql);
 
-    $sql = "SELECT member_num FROM CHATTINGLIST WHERE member_num = 1 and room_name = '" . $r_name . "'";
+    $sql = "SELECT member_num FROM CHATTINGLIST WHERE room_name = '" . $r_name . "'";
     $result = mysqli_query($connect, $sql);
     $result = mysqli_fetch_row($result);
 
